@@ -8,7 +8,8 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class data {
-	
+	private List< List<String> > core;
+
 	public String tString() {
 		String res="";
 		for(List<String> ls:core){
@@ -17,8 +18,6 @@ public class data {
 		}
 		return res;
 	}
-
-	private List< List<String> > core;
 	
 	public data(String path) throws IOException{
 		core = new LinkedList< List<String> >();
