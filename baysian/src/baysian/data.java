@@ -9,7 +9,8 @@ import java.util.*;
 
 public class data {
 	private List< List<String> > core;
-
+	private int N;
+	private int r[];
 	public String tString() {
 		String res="";
 		for(List<String> ls:core){
@@ -18,7 +19,29 @@ public class data {
 		}
 		return res;
 	}
-	
+	public void setR(){
+		int p=0;
+		r=new int[N];
+		List<HashSet<Integer>> hstr = new LinkedList<HashSet<Integer>>();
+		for(int i=0;i!=N;++i){
+			hstr.add(new HashSet<Integer>());
+		}
+		for(int k=1;k!=core.size();++k){
+			List<String> lstr = core.get(k);
+			p=0;
+			for(String s:lstr){
+				int j = p%N;
+				hstr.get(j).add(Integer.parseInt(s));
+				++p;
+			}
+		}
+		for(int i=0;i!=N;++i){
+			r[i]=hstr.get(i).size();
+		}
+	}
+	public int[] getR() {
+		return r;
+	}
 	public data(String path) throws IOException{
 		core = new LinkedList< List<String> >();
 		List<String> lstr = getFile(Paths.get(path));
@@ -37,6 +60,27 @@ public class data {
         return hi;
     }
 	
+	public Digraph<String> genGraph(){
+		Digraph<String> Vgraph = new Digraph<String>();
+		List<String> lstr = core.get(0);
+		N=0;
+		for(String s:lstr){
+			int len = s.length();
+			String c = s.substring(len-1, len);
+			String m = s.substring(0, len-2);
+			if(c.equals("0")){
+				Vgraph.add(m);
+				N++;
+			}
+			else break;
+		}
+		return Vgraph;
+	}
+	
+	public int getN() {
+		return N;
+	}
+
 	public LinkedList<Integer> getDataSize(){
 		LinkedList<Integer> ilist= new LinkedList<Integer>();
 		for(List<String> lst:core){

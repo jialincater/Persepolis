@@ -23,7 +23,7 @@ public class Digraph<V> {
     public String toString () {
         StringBuffer s = new StringBuffer();
         for (V v: neighbors.keySet()) s.append("\n    " + v + " -> " + neighbors.get(v));
-        return s.toString();                
+        return s.toString();
     }
     
     /**
@@ -35,7 +35,7 @@ public class Digraph<V> {
     }
     
     /**
-     * True iff graph contains vertex.
+     * True if graph contains vertex.
      */
     public boolean contains (V vertex) {
         return neighbors.containsKey(vertex);
