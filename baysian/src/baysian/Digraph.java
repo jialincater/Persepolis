@@ -15,9 +15,17 @@ public class Digraph<V> {
      * of an array of lists, a Map is used to map each vertex to its list of 
      * adjacent vertices.
      */   
-    private Map<V,List<V>> neighbors = new HashMap<V,List<V>>();
-    
-    /**
+    public Map<V,List<V>> neighbors = new HashMap<V,List<V>>();
+
+	public Digraph(Digraph<V> np) {
+		this.neighbors = np.neighbors;
+	}
+
+	public Digraph() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * String representation of graph.
      */
     public String toString () {
@@ -40,6 +48,14 @@ public class Digraph<V> {
     public boolean contains (V vertex) {
         return neighbors.containsKey(vertex);
     }
+
+    public boolean contains (V from,V to) {
+        if(!neighbors.containsKey(from))
+        	return false;
+        else if(neighbors.get(from).contains(to))
+        	return true;
+        else return false;
+    }
     
     /**
      * Add an edge to the graph; if either vertex does not exist, it's added.
@@ -58,6 +74,14 @@ public class Digraph<V> {
         if (!(this.contains(from) && this.contains(to)))
             throw new IllegalArgumentException("Nonexistent vertex");
         neighbors.get(from).remove(to);
+    }
+    /**
+     * Reverse an edge from the graph.  Nothing happens if no such edge.
+     * @throws IllegalArgumentException if either vertex doesn't exist.
+     */
+    public void reverse (V from, V to) {
+        neighbors.remove(from,to);
+        neighbors.get(to).add(from);
     }
     
     /**
@@ -111,7 +135,7 @@ public class Digraph<V> {
     }
     
     /**
-     * True iff graph is a dag (directed acyclic graph).
+     * True if graph is a dag (directed acyclic graph).
      */
     public boolean isDag () {
         return topSort() != null;
