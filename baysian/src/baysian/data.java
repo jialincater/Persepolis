@@ -9,6 +9,7 @@ import java.util.*;
 
 public class data {
 	private List< List<String> > core;
+	private List<String> Vl = new LinkedList<String>();
 	private int N;
 	private int r[];
 	public String tString() {
@@ -70,6 +71,7 @@ public class data {
 			String m = s.substring(0, len-2);
 			if(c.equals("0")){
 				Vgraph.add(m);
+				Vl.add(m);
 				N++;
 			}
 			else break;
@@ -77,6 +79,9 @@ public class data {
 		return Vgraph;
 	}
 	
+	public List<String> getVl() {
+		return Vl;
+	}
 	public int getN() {
 		return N;
 	}
