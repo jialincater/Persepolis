@@ -67,6 +67,19 @@ public class Digraph<V> {
     }
     
     /**
+     * Travel through the Graph and get the pais of the Vertex
+     */
+    public List<V> getPais(V v){
+    	List<V> lv = new LinkedList<V>();
+    	for(V tem:neighbors.keySet()){
+    		if(neighbors.get(tem).contains(v)){
+    			lv.add(tem);
+    		}
+    	}
+    	return lv;
+    }
+    
+    /**
      * Remove an edge from the graph.  Nothing happens if no such edge.
      * @throws IllegalArgumentException if either vertex doesn't exist.
      */
