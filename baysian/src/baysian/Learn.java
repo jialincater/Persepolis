@@ -3,6 +3,7 @@ package baysian;
 import java.util.*;
 
 public class Learn {	
+	
 	/*
 	To Learn a Baysian Network, not Dynamic
 	*/
@@ -83,7 +84,7 @@ public class Learn {
 //				Tudo: random restart should assign Nini another value
 				if(timeCNT <restime){
 					timeCNT++;
-//					Np=...
+					Np=dagGen(Nini,da.getVl());
 					continue;
 				}
 				else{
@@ -96,5 +97,26 @@ public class Learn {
 			Np=Npp;
 		}
 		return Nres; 
+	}
+	
+	public Digraph<String> dagGen(Digraph<String> ini,List<String> Vl){
+		Digraph<String> Res = ini;
+		int N = ini.neighbors.size();
+		int NumberOfEdge = (int)(Math.random()*(N*N-N)/2);
+		for(int i =0;i!=NumberOfEdge;++i){
+			int x=(int)(Math.random()*N),y=(int)(Math.random()*N);
+			if(x!=y){
+				Res.add(Vl.get(x), Vl.get(y));
+				if(false==Res.isDag()){
+					Res.remove(Vl.get(x), Vl.get(y));
+					i--;
+				}
+			}
+			else{
+				i--;
+				continue;
+			}
+		}
+		return Res;
 	}
 }
