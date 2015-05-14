@@ -12,15 +12,17 @@ public final class Runtest
     {
     	data train = new data("/Users/Cater/Desktop/train-data.csv");
     	Digraph<String> ini = train.genGraph();
-    	
-    	ini.add("c","a");
-    	ini.add("a","b");
+//    	ini.add("c","a");
+//    	ini.add("a","b");
     	train.setR();
-    	System.out.println(ini.getPais("b"));
-    	llscore ll = new llscore(train,ini);
-    	System.out.println(ll.resultOfScore());
-    	System.out.println(Arrays.toString(train.getR()));
+    	Learn miao = new Learn();
+    	ini = miao.dagGen(ini, train.getVl());
     	System.out.println(ini);
+//    	System.out.println(ini.getPais("b"));
+//    	llscore ll = new llscore(train,ini);
+//    	System.out.println(ll.resultOfScore());
+//    	System.out.println(Arrays.toString(train.getR()));
+//    	System.out.println(ini);
 //    	System.out.println(train.getN());
     }
 }

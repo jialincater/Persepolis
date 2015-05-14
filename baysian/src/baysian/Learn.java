@@ -38,7 +38,7 @@ public class Learn {
 						Digraph<String> graphContainsEdgeReverse = new Digraph<String>(graphToFix);
 						graphContainsEdgeReverse.remove(da.getVl().get(i), da.getVl().get(j));
 						graphContainsEdgeRemove.reverse(da.getVl().get(i), da.getVl().get(j));
-						if(graphContainsEdgeRemove.isDag()&&!TABU.contains(graphContainsEdgeRemove)){
+						if(!TABU.contains(graphContainsEdgeRemove)){
 							temp.put(graphContainsEdgeRemove, null);
 							TABU.add(graphContainsEdgeRemove);
 						}
@@ -102,11 +102,22 @@ public class Learn {
 	public Digraph<String> dagGen(Digraph<String> ini,List<String> Vl){
 		Digraph<String> Res = ini;
 		int N = ini.neighbors.size();
+		int CNT = 0;
 		int NumberOfEdge = (int)(Math.random()*(N*N-N)/2);
 		for(int i =0;i!=NumberOfEdge;++i){
+			CNT++;
+			if(CNT>50){
+				break;
+			}
 			int x=(int)(Math.random()*N),y=(int)(Math.random()*N);
 			if(x!=y){
-				Res.add(Vl.get(x), Vl.get(y));
+				if(!Res.contains(Vl.get(x), Vl.get(y))){
+					Res.add(Vl.get(x), Vl.get(y));
+				}
+				else{
+					i--;
+					continue;
+				}
 				if(false==Res.isDag()){
 					Res.remove(Vl.get(x), Vl.get(y));
 					i--;
