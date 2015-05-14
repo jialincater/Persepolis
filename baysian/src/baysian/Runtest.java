@@ -12,8 +12,9 @@ public final class Runtest
     {
     	data train = new data("/Users/Cater/Desktop/train-data.csv");
     	Digraph<String> ini = train.genGraph();
+    	
+    	ini.add("c","a");
     	ini.add("a","b");
-    	ini.add("b","c");
     	train.setR();
     	System.out.println(ini.getPais("b"));
     	llscore ll = new llscore(train,ini);

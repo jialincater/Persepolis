@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class llscore extends scoringfunction{
-	int shift = 65;
+	int shift = 97;
 	private int[] rll;
 	private int[] numberOfState;
 	private int parent=0;
@@ -20,10 +20,12 @@ public class llscore extends scoringfunction{
 			qll[i]=1;
 		}
 		for (int n = 0 ; n < numberOfNode ; n++){
-			
-			List<String> ls= digraph1.getPais(""+(char)(n+shift));
+			String tel = ""+(char)(n+shift);
+			System.out.println(tel);
+			List<String> ls= digraph1.getPais(tel);
 			if(ls.size()==0){
 				qll[n]=0;
+				continue;
 			}
 			int[] arrayOfParents = new int[ls.size()];
 
@@ -37,11 +39,13 @@ public class llscore extends scoringfunction{
 			for(int i=1;i<data1.getCore().size();i++){
 				for(int j=n;j<data1.getCore().get(i).size();j+=numberOfNode){
 					firstParameter=n;
+					secondParameter=0;
 					for(int p=0;p<ls.size();p++){
 						secondParameter+=Integer.parseInt(data1.getCore().get(i).get(arrayOfParents[p]))*Math.pow(2,ls.size()-p-1);
 					}
 					thirdParameter=Integer.parseInt(data1.getCore().get(i).get(j));
 					count[firstParameter][secondParameter][thirdParameter]++;
+					System.out.println(count[firstParameter][secondParameter][thirdParameter]);
 				}
 			}
 		}	
