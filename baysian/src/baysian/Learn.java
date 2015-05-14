@@ -6,21 +6,25 @@ public class Learn {
 	/*
 	To Learn a Baysian Network, not Dynamic
 	*/
-	public Digraph<String> learnStructures(Digraph<String> Nini, data da){
+	public Digraph<String> learnDBStructures(Digraph<String> Nini, data da, int restime){
 //		Nini is a Digraph that without any edge
 		Digraph<String> Nres = Nini;
-//		Nres is the result of the Digraph
-		Digraph<String> Np = Nres;
 		Double Sres=Double.MIN_VALUE;
-		boolean flag= false;
+//		Nres is the result of the Digraph
+//		The biggest of every step
+		Double SNp=Double.MIN_VALUE;
+		Digraph<String> Np = Nres;
+//		restart time here
+		int timeCNT = 0;
 		LinkedList<Digraph<String>> TABU = new LinkedList<Digraph<String>>();
+		TABU.add(Nini);
 //		Need to get the right flag
-		while(flag){
+		while(timeCNT<restime){
+			Map<Digraph<String>,Double> temp = new HashMap<Digraph<String>,Double>();
+			Digraph<String> graphToFix = new Digraph<String>(Np);
 //			Have a N-times Loop
 //			Fix every Vertex each time
-			for(int i =0;i!=da.getN();++i){
-				Map<Digraph<String>,Double> temp = new HashMap<Digraph<String>,Double>();
-				Digraph<String> graphToFix = new Digraph<String>(Np);
+			for(int i =0;i!=da.getN();++i){	
 //				Have a N-times Loop
 //				Fix every Vertex each time
 				for(int j=0;j!=da.getN();j++){
@@ -52,32 +56,44 @@ public class Learn {
 						}			
 					}
 				}
-//				Scoring the temp HERE
-				
-
-//				Travel through the temp MAP, get the best neighbour 
-				Double max=Double.MIN_VALUE;
-				Digraph<String> Npp=new Digraph<String>();
-				Iterator<HashMap.Entry<Digraph<String>, Double>> entries = temp.entrySet().iterator();  
-
-				while (entries.hasNext()) {  
-				    Map.Entry<Digraph<String>, Double> entry = entries.next();
-//				    To score 
-				    double score = llscore(da.getCore(),entry.getKey());
-				    entry.setValue(score);
-				    if(entry.getValue()>max){
-				    	Npp=entry.getKey();
-				    	max=entry.getValue();
-				    }
-				}
-//				if the best neighbor is better than current result, replace it.
-				if(max>Sres){
-					Nres=Npp;
-					Sres=max;
-				}
-				Np=Npp;
+//				
 			}
-			
+//			Scoring the temp HERE
+//			Travel through the temp MAP, get the best neighbour 
+			Double max=Double.MIN_VALUE;
+			Digraph<String> Npp=new Digraph<String>();
+			Iterator<HashMap.Entry<Digraph<String>, Double>> entries = temp.entrySet().iterator();  
+
+			while (entries.hasNext()) {  
+			    Map.Entry<Digraph<String>, Double> entry = entries.next();
+//			    To score 
+			    double score = llscore(da.getCore(),entry.getKey());
+			    entry.setValue(score);
+			    if(entry.getValue()>max){
+			    	Npp=entry.getKey();
+			    	max=entry.getValue();
+			    }
+			}
+//			if the best neighbor is better than current result, replace it.
+			if(max>SNp){
+				Np=Npp;
+				SNp=max;
+			}
+			else{
+//				Tudo: random restart should assign Nini another value
+				if(timeCNT <restime){
+					timeCNT++;
+//					Np=...
+					continue;
+				}
+				else{
+					break;
+				}
+			}
+			if(max>Sres){
+				Nres = Npp;
+			}
+			Np=Npp;
 		}
 		return Nres; 
 	}
