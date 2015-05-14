@@ -15,10 +15,11 @@ public final class Runtest
     	ini.add("a","b");
     	ini.add("b","c");
     	train.setR();
+    	System.out.println(ini.getPais("b"));
     	llscore ll = new llscore(train,ini);
     	System.out.println(ll.resultOfScore());
-//    	System.out.println(Arrays.toString(train.getR()));
-//    	System.out.println(ini);
+    	System.out.println(Arrays.toString(train.getR()));
+    	System.out.println(ini);
 //    	System.out.println(train.getN());
     }
 }

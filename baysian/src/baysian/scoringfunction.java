@@ -4,8 +4,8 @@ public abstract class scoringfunction {
 	int firstParameter;   
 	int secondParameter;
 	int thirdParameter;
-	int count[][][]=new int[3][20][5];
-	int counts[][]=new int[3][20];
+	int count[][][]=new int[3][40][5];
+	int counts[][]=new int[3][40];
 	
 	int numberOfNode;     
 	
