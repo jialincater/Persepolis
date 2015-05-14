@@ -1,21 +1,22 @@
 package baysian;
 public abstract class scoringfunction {
-
-	int count[][][];
-	int counts[][];
 	
-	int numberOfNode;     //the first parameter of count
-	int numberOfParent;   //the second parameter of count
-	int numberOfValue;    //the third parameter of count
+	int firstParameter;   
+	int secondParameter;
+	int thirdParameter;
+	int count[][][]=new int[3][20][5];
+	int counts[][]=new int[3][20];
 	
-	//Initialization the result of the scroing function
-	double llscore=0.0;
-	double mdlscore=0.0;
+	int numberOfNode;     
+	
+	
+	
+	
+	//Initialization the result of the scoring function
+	double llscore;
+	double mdlscore;
 	
 	public abstract double resultOfScore();
-		
-	public static void main(String[] args) {
-	
-	}
+
 
 }

@@ -12,10 +12,14 @@ public final class Runtest
     {
     	data train = new data("/Users/Cater/Desktop/train-data.csv");
     	Digraph<String> ini = train.genGraph();
+    	ini.add("a","b");
+    	ini.add("b","c");
     	train.setR();
-    	System.out.println(Arrays.toString(train.getR()));
-    	System.out.println(ini);
-    	System.out.println(train.getN());
+    	llscore ll = new llscore(train,ini);
+    	System.out.println(ll.resultOfScore());
+//    	System.out.println(Arrays.toString(train.getR()));
+//    	System.out.println(ini);
+//    	System.out.println(train.getN());
     }
 }
 
