@@ -8,6 +8,10 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class data {
+	public List<List<String>> getCore() {
+		return core;
+	}
+
 	private List< List<String> > core;
 	private List<String> Vl = new ArrayList<String>();
 	private int N;
