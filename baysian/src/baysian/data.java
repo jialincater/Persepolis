@@ -9,7 +9,7 @@ import java.util.*;
 
 public class data {
 	private List< List<String> > core;
-	private List<String> Vl = new LinkedList<String>();
+	private List<String> Vl = new ArrayList<String>();
 	private int N;
 	private int r[];
 	public String tString() {
@@ -23,7 +23,7 @@ public class data {
 	public void setR(){
 		int p=0;
 		r=new int[N];
-		List<HashSet<Integer>> hstr = new LinkedList<HashSet<Integer>>();
+		List<HashSet<Integer>> hstr = new ArrayList<HashSet<Integer>>();
 		for(int i=0;i!=N;++i){
 			hstr.add(new HashSet<Integer>());
 		}
@@ -44,11 +44,11 @@ public class data {
 		return r;
 	}
 	public data(String path) throws IOException{
-		core = new LinkedList< List<String> >();
+		core = new ArrayList< List<String> >();
 		List<String> lstr = getFile(Paths.get(path));
    	 	for(String x:lstr){
    	 		String[] buf = x.split(",",-1);
-   	 		List<String> listr = new LinkedList<String>();
+   	 		List<String> listr = new ArrayList<String>();
    	 		for(String s:buf){
    	 			listr.add(s);
    	 		}
@@ -86,8 +86,8 @@ public class data {
 		return N;
 	}
 
-	public LinkedList<Integer> getDataSize(){
-		LinkedList<Integer> ilist= new LinkedList<Integer>();
+	public ArrayList<Integer> getDataSize(){
+		ArrayList<Integer> ilist= new ArrayList<Integer>();
 		for(List<String> lst:core){
 			ilist.add(lst.size());
 		}
