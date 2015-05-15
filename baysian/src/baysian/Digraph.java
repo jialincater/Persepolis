@@ -23,7 +23,7 @@ public class Digraph<V> {
 		Iterator<HashMap.Entry<V, List<V>>> entries = np.neighbors.entrySet().iterator();  
 		while (entries.hasNext()) {  
 		    Map.Entry<V, List<V>> entry = entries.next();
-		    this.neighbors.put(entry.getKey(), entry.getValue());
+		    this.neighbors.put(entry.getKey(), new ArrayList<V>(entry.getValue()));
 		}
 	}
 
