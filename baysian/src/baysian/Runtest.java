@@ -18,13 +18,14 @@ public final class Runtest
     	data train = new data("/Users/Cater/Desktop/train-data.csv");
     	Digraph<String> ini = train.genGraph();
     	train.setR();
+    	System.out.println(train.getDcore());
     	Learn Xuexi = new Learn();
-    	Digraph<String> res = Xuexi.learnDBStructures(ini, train, 100);
+//    	Digraph<String> res = Xuexi.learnDBStructures(ini, train, 100);
     	
 //    	llscore ll = new llscore(train,ini);
 //    	System.out.println(ll.resultOfScore());
 //    	System.out.println(Arrays.toString(train.getR()));
-    	System.out.println(res);
+//    	System.out.println(res);
 //    	System.out.println(train.getN());
     }
 }

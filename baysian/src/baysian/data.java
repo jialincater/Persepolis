@@ -13,6 +13,7 @@ public class data {
 	}
 
 	private List< List<String> > core;
+	private List< List<Integer> > Dcore=new ArrayList< List<Integer> >();
 	private List<String> Vl = new ArrayList<String>();
 	private int N;
 	private int r[];
@@ -80,9 +81,25 @@ public class data {
 			}
 			else break;
 		}
+		
+		ListIterator<List<String>> lis = core.listIterator(); 
+   	 	lis.next();
+   	 	while(lis.hasNext()){
+   	 		List<String> temp = lis.next();
+   	 		for(int i=0;i!=temp.size()/N-1;++i){
+   	   	 		List<Integer> li = new ArrayList<Integer>();
+   	 			for(int j=0;j!=2*N;++j){
+   	 				li.add(Integer.parseInt(temp.get(j+i*N)));
+   	 			}
+   	 			Dcore.add(li);
+   	 		}
+   	 	}
 		return Vgraph;
 	}
 	
+	public List<List<Integer>> getDcore() {
+		return Dcore;
+	}
 	public List<String> getVl() {
 		return Vl;
 	}
