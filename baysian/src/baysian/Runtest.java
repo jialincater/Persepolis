@@ -19,7 +19,7 @@ public final class Runtest
     	Digraph<String> ini = train.genGraph();
     	train.setR();
     	Learn Xuexi = new Learn();
-    	Digraph<String> res = Xuexi.learnDBStructures(ini, train, 20);
+    	Digraph<String> res = Xuexi.learnDBStructures(ini, train, 100);
     	
 //    	llscore ll = new llscore(train,ini);
 //    	System.out.println(ll.resultOfScore());

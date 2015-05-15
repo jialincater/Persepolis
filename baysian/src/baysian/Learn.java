@@ -22,7 +22,7 @@ public class Learn {
 //		Start the loop, time of loop is constrained by restime
 		while(timeCNT<restime){
 			Map<Digraph<String>,Double> temp = new HashMap<Digraph<String>,Double>();
-			Digraph<String> graphToFix = new Digraph<String>(Np);
+			Digraph<String> graphToFix = isCopyOf(Np);
 //			Have a N-times Loop
 //			Fix every Vertex each time
 			for(int i =0;i!=da.getN();++i){	
@@ -71,9 +71,11 @@ public class Learn {
 			while (entries.hasNext()) {  
 			    Map.Entry<Digraph<String>, Double> entry = entries.next();
 //			    To score 
-			    System.out.println(entry.getKey());
+//			    System.out.println(entry.getKey());
 			    llscore getScore = new llscore(da,entry.getKey());
 			    double score = getScore.resultOfScore();
+			    mdlscore mscore = new mdlscore(da,entry.getKey(),getScore.getLlscore(),getScore.getQll(),getScore.getTotalNumber());
+			    score = mscore.resultOfScore();
 			    entry.setValue(score);
 			    if(entry.getValue()>max){
 			    	Npp=entry.getKey();
@@ -84,19 +86,24 @@ public class Learn {
 			if(max>SNp){
 				Np=Npp;
 				SNp=max;
+			    System.out.println("New local best: "+max);
+			    System.out.println(Np);
 			}
 			else{
-//				Tudo: random restart assign Np a random value
+//				random restart assign Np a random value
 				if(timeCNT <restime){
 					timeCNT++;
 					Np=dagGen(Nini,da.getVl());
+					SNp = Double.MIN_VALUE;
+				    System.out.println("Restart:"+timeCNT);
 					continue;
 				}
 				else{
 					break;
 				}
 			}
-			if(max>Sres){
+			if(SNp>Sres){
+				Sres = SNp;
 				Nres = Npp;
 			}
 			Np=Npp;

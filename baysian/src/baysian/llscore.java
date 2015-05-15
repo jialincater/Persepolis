@@ -1,13 +1,11 @@
 package baysian;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 
 public class llscore extends scoringfunction{
 	private int shift = 97;
-	private int[] rll;
 	private int parent=0;
 
 	llscore(data data1, Digraph<String> digraph1){
@@ -73,7 +71,8 @@ public class llscore extends scoringfunction{
 				for(int k=0;k<rll[i];k++){
 					counts[i][j]+=count[i][j][k];	
 				}
-				System.out.println(counts[i][j]);
+				totalNumber++;
+//				System.out.println(totalNumber + " " +counts[i][j]);
 			}
 		}
 		
@@ -87,7 +86,7 @@ public class llscore extends scoringfunction{
 						continue;
 					}
 					else
-						llscore=llscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j]);
+						llscore=llscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log10(2);
 				}
 			}
 		}
