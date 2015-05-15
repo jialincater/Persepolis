@@ -9,30 +9,22 @@ import java.io.*;
 
 public final class Runtest
 {
+	public static Digraph<String> isCopyOf(Digraph<String> org){
+		Digraph<String> NewGraph = new Digraph<String>(org);
+		return NewGraph;
+	}
 	public static void main(String [] args) throws IOException
     {
-		Stopwatch sw = new Stopwatch();
     	data train = new data("/Users/Cater/Desktop/train-data.csv");
     	Digraph<String> ini = train.genGraph();
-//    	ini.add("c","a");
-//    	ini.add("a","b");
-    	ArrayList<Digraph<String>> m = new ArrayList<Digraph<String>>();
-    	m.add(ini);
-    	ini.add("n");
-    	m.add(ini);
-    	System.out.println(m);
-//    	train.setR();
-//    	Learn miao = new Learn();
-//    	Digraph<String> graphContainsEdgeRemove = new Digraph<String>();
-//    	ini = miao.dagGen(graphContainsEdgeRemove, train.getVl());
-//    	System.out.println(ini);
-//    	System.out.println(graphContainsEdgeRemove);
-//		System.out.println(sw.elapsedTime());
-//    	System.out.println(ini.getPais("b"));
+    	train.setR();
+    	Learn Xuexi = new Learn();
+    	Digraph<String> res = Xuexi.learnDBStructures(ini, train, 20);
+    	
 //    	llscore ll = new llscore(train,ini);
 //    	System.out.println(ll.resultOfScore());
 //    	System.out.println(Arrays.toString(train.getR()));
-//    	System.out.println(ini);
+    	System.out.println(res);
 //    	System.out.println(train.getN());
     }
 }
