@@ -7,13 +7,13 @@ public class Learn {
 	/*
 	To Learn a Baysian Network, not Dynamic
 	*/
-	public Digraph<String> learnDBStructures(Digraph<String> Nini, data da, int restime){
+	public Digraph<String> learnBNStructures(Digraph<String> Nini, data da, int restime){
 //		Nini is a Digraph that without any edge
 		Digraph<String> Nres = Nini;
-		Double Sres=Double.MIN_VALUE;
+		Double Sres=Double.NEGATIVE_INFINITY;
 //		Nres is the result of the Digraph
 //		The biggest of every step
-		Double SNp=Double.MIN_VALUE;
+		Double SNp=Double.NEGATIVE_INFINITY;
 		Digraph<String> Np = Nres;
 //		restart time here
 		int timeCNT = 0;
@@ -38,13 +38,13 @@ public class Learn {
 						Digraph<String> graphContainsEdgeReverse = isCopyOf(graphToFix);
 						graphContainsEdgeReverse.remove(da.getVl().get(i), da.getVl().get(j));
 						graphContainsEdgeRemove.reverse(da.getVl().get(i), da.getVl().get(j));
-						if(!TABU.contains(graphContainsEdgeRemove)){
-							System.out.println(graphContainsEdgeRemove);
+						if(graphContainsEdgeRemove.isDag()&&!TABU.contains(graphContainsEdgeRemove)){
+//							System.out.println(graphContainsEdgeRemove);
 							temp.put(graphContainsEdgeRemove, null);
 							TABU.add(graphContainsEdgeRemove);
 						}
 						if(graphContainsEdgeReverse.isDag()&&!TABU.contains(graphContainsEdgeReverse)){
-							System.out.println(graphContainsEdgeReverse);
+//							System.out.println(graphContainsEdgeReverse);
 							temp.put(graphContainsEdgeReverse, null);
 							TABU.add(graphContainsEdgeReverse);
 						}
@@ -54,7 +54,7 @@ public class Learn {
 						Digraph<String> graphNotContainsEdgeAdd = isCopyOf(graphToFix);
 						graphNotContainsEdgeAdd.add(da.getVl().get(i), da.getVl().get(j));
 						if(graphNotContainsEdgeAdd.isDag()&&!TABU.contains(graphNotContainsEdgeAdd)){
-							System.out.println(graphNotContainsEdgeAdd);
+//							System.out.println(graphNotContainsEdgeAdd);
 							temp.put(graphNotContainsEdgeAdd, null);
 							TABU.add(graphNotContainsEdgeAdd);
 						}			
@@ -64,18 +64,19 @@ public class Learn {
 			}
 //			Scoring the temp HERE
 //			Travel through the temp MAP, get the best neighbour 
-			Double max=Double.MIN_VALUE;
+			Double max=Double.NEGATIVE_INFINITY;
 			Digraph<String> Npp=new Digraph<String>();
 			Iterator<HashMap.Entry<Digraph<String>, Double>> entries = temp.entrySet().iterator();  
 
 			while (entries.hasNext()) {  
 			    Map.Entry<Digraph<String>, Double> entry = entries.next();
 //			    To score 
-//			    System.out.println(entry.getKey());
 			    llscore getScore = new llscore(da,entry.getKey());
 			    double score = getScore.resultOfScore();
-			    mdlscore mscore = new mdlscore(da,entry.getKey(),getScore.getLlscore(),getScore.getQll(),getScore.getTotalNumber());
-			    score = mscore.resultOfScore();
+//			    mdlscore mscore = new mdlscore(da,entry.getKey(),getScore.getLlscore(),getScore.getQll(),getScore.getTotalNumber());
+//			    score = mscore.resultOfScore();
+			    System.out.println("Score:"+score);
+			    System.out.println(entry.getKey());
 			    entry.setValue(score);
 			    if(entry.getValue()>max){
 			    	Npp=entry.getKey();
@@ -94,7 +95,7 @@ public class Learn {
 				if(timeCNT <restime){
 					timeCNT++;
 					Np=dagGen(Nini,da.getVl());
-					SNp = Double.MIN_VALUE;
+					SNp = Double.NEGATIVE_INFINITY;
 				    System.out.println("Restart:"+timeCNT);
 					continue;
 				}
@@ -103,6 +104,8 @@ public class Learn {
 				}
 			}
 			if(SNp>Sres){
+				System.out.println("NEW GLOBAL BEST: "+SNp);
+				System.out.println(Npp);
 				Sres = SNp;
 				Nres = Npp;
 			}
