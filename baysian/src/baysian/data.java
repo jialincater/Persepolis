@@ -8,16 +8,19 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class data {
-	public List<List<String>> getCore() {
-		return core;
-	}
 
 	private List< List<String> > core;
 	private List< List<Integer> > Dcore=new ArrayList< List<Integer> >();
 	private List<String> Vl = new ArrayList<String>();
 	private int N;
 	private int r[];
-	public String tString() {
+	
+	/*
+	 * translate the data to String
+	 * ONLY for debugging
+	 * Don't use that any way
+	 */
+	private String tString() {
 		String res="";
 		for(List<String> ls:core){
 			res+=ls;
@@ -25,6 +28,11 @@ public class data {
 		}
 		return res;
 	}
+	
+	/*
+	 * Like a 2nd constructor
+	 * should be use every time after you read the data
+	 */
 	public void setR(){
 		int p=0;
 		r=new int[N];
@@ -45,9 +53,18 @@ public class data {
 			r[i]=hstr.get(i).size();
 		}
 	}
+	
+	/*
+	 * For get R
+	 */
 	public int[] getR() {
 		return r;
 	}
+	
+	/*
+	 * Constructor...
+	 * You need it...
+	 */
 	public data(String path) throws IOException{
 		core = new ArrayList< List<String> >();
 		List<String> lstr = getFile(Paths.get(path));
@@ -61,12 +78,22 @@ public class data {
    	 	}
 	}
 	
+	
+	/*
+	 * A function only used by constructor
+	 * So that's private~
+	 */
 	private static List<String> getFile( Path file) throws IOException{
 		List<String> hi  = Files.readAllLines(file, StandardCharsets.US_ASCII);
         return hi;
     }
 	
-	public Digraph<String> genGraph(){
+	/*
+	 * Generate a BN Graph
+	 * NOT DBN
+	 * Only have N vertex
+	 */
+	public Digraph<String> genBNGraph(){
 		Digraph<String> Vgraph = new Digraph<String>();
 		List<String> lstr = core.get(0);
 		N=0;
@@ -97,21 +124,46 @@ public class data {
 		return Vgraph;
 	}
 	
+	/*
+	 * To get the Dcore data
+	 * Use By DBN
+	 */
 	public List<List<Integer>> getDcore() {
 		return Dcore;
 	}
+	
+	/*
+	 * To get Vl
+	 * Which is Vertex List
+	 */
 	public List<String> getVl() {
 		return Vl;
 	}
+	
+	/*
+	 * To get N
+	 * Which is number of vertex
+	 */
 	public int getN() {
 		return N;
 	}
 
-	public ArrayList<Integer> getDataSize(){
+	/*
+	 * I think No one use that
+	 * DEBUG ONLY
+	 */
+	private ArrayList<Integer> getDataSize(){
 		ArrayList<Integer> ilist= new ArrayList<Integer>();
 		for(List<String> lst:core){
 			ilist.add(lst.size());
 		}
 		return ilist;
+	}
+	
+	/*
+	 * To get the Core data which is read directly from csv file
+	 */
+	public List<List<String>> getCore() {
+		return core;
 	}
 }
