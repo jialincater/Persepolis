@@ -39,10 +39,12 @@ public class Learn {
 						graphContainsEdgeReverse.remove(da.getVl().get(i), da.getVl().get(j));
 						graphContainsEdgeRemove.reverse(da.getVl().get(i), da.getVl().get(j));
 						if(!TABU.contains(graphContainsEdgeRemove)){
+							System.out.println(graphContainsEdgeRemove);
 							temp.put(graphContainsEdgeRemove, null);
 							TABU.add(graphContainsEdgeRemove);
 						}
 						if(graphContainsEdgeReverse.isDag()&&!TABU.contains(graphContainsEdgeReverse)){
+							System.out.println(graphContainsEdgeReverse);
 							temp.put(graphContainsEdgeReverse, null);
 							TABU.add(graphContainsEdgeReverse);
 						}
@@ -52,6 +54,7 @@ public class Learn {
 						Digraph<String> graphNotContainsEdgeAdd = isCopyOf(graphToFix);
 						graphNotContainsEdgeAdd.add(da.getVl().get(i), da.getVl().get(j));
 						if(graphNotContainsEdgeAdd.isDag()&&!TABU.contains(graphNotContainsEdgeAdd)){
+							System.out.println(graphNotContainsEdgeAdd);
 							temp.put(graphNotContainsEdgeAdd, null);
 							TABU.add(graphNotContainsEdgeAdd);
 						}			
@@ -68,6 +71,7 @@ public class Learn {
 			while (entries.hasNext()) {  
 			    Map.Entry<Digraph<String>, Double> entry = entries.next();
 //			    To score 
+			    System.out.println(entry.getKey());
 			    llscore getScore = new llscore(da,entry.getKey());
 			    double score = getScore.resultOfScore();
 			    entry.setValue(score);
