@@ -2,6 +2,7 @@ package baysian;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,12 @@ public class Digraph<V> {
     public Map<V,List<V>> neighbors = new HashMap<V,List<V>>();
 
 	public Digraph(Digraph<V> np) {
-		this.neighbors = np.neighbors;
+//		this.neighbors = new HashMap<V,List<V>>(np.neighbors);
+		Iterator<HashMap.Entry<V, List<V>>> entries = np.neighbors.entrySet().iterator();  
+		while (entries.hasNext()) {  
+		    Map.Entry<V, List<V>> entry = entries.next();
+		    this.neighbors.put(entry.getKey(), entry.getValue());
+		}
 	}
 
 	public Digraph() {

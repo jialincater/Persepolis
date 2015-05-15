@@ -19,7 +19,7 @@ public class Learn {
 		int timeCNT = 0;
 		LinkedList<Digraph<String>> TABU = new LinkedList<Digraph<String>>();
 		TABU.add(Nini);
-//		Need to get the right flag
+//		Start the loop, time of loop is constrained by restime
 		while(timeCNT<restime){
 			Map<Digraph<String>,Double> temp = new HashMap<Digraph<String>,Double>();
 			Digraph<String> graphToFix = new Digraph<String>(Np);
@@ -81,7 +81,7 @@ public class Learn {
 				SNp=max;
 			}
 			else{
-//				Tudo: random restart should assign Nini another value
+//				Tudo: random restart assign Np a random value
 				if(timeCNT <restime){
 					timeCNT++;
 					Np=dagGen(Nini,da.getVl());
