@@ -16,16 +16,11 @@ public class llscore extends scoringfunction{
 		rll = data1.getR();
 		numberOfNode = data1.getN();
 		qll=new int[numberOfNode];
-		for (int i = 0; i < qll.length; i++) {
-			qll[i]=1;
-		}
 		for (int n = 0 ; n < numberOfNode ; n++){
-			String tel = ""+(char)(n+shift);
-			System.out.println(tel);
-			List<String> ls= digraph1.getPais(tel);
+			
+			List<String> ls= digraph1.getPais(""+(char)(n+shift));
 			if(ls.size()==0){
-				qll[n]=0;
-				continue;
+				qll[n]=1;
 			}
 			int[] arrayOfParents = new int[ls.size()];
 
@@ -36,16 +31,14 @@ public class llscore extends scoringfunction{
 				arrayOfParents[aop]=parent;
 				qll[n]*=rll[parent];
 			}
-			for(int i=1;i<data1.getCore().size();i++){
-				for(int j=n;j<data1.getCore().get(i).size();j+=numberOfNode){
+			for(int i=1;i<data1.getCore().size()-1;i++){
+				for(int j=n;j<data1.getCore().get(i).size();j+=j+numberOfNode){
 					firstParameter=n;
-					secondParameter=0;
 					for(int p=0;p<ls.size();p++){
 						secondParameter+=Integer.parseInt(data1.getCore().get(i).get(arrayOfParents[p]))*Math.pow(2,ls.size()-p-1);
 					}
 					thirdParameter=Integer.parseInt(data1.getCore().get(i).get(j));
 					count[firstParameter][secondParameter][thirdParameter]++;
-					System.out.println(count[firstParameter][secondParameter][thirdParameter]);
 				}
 			}
 		}	

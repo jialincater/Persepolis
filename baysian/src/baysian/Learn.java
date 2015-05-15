@@ -34,8 +34,8 @@ public class Learn {
 //					Test if t contains the edge i->j
 					else if(graphToFix.contains(da.getVl().get(i),da.getVl().get(j))){
 //						if t contains i->j, try to delete or reverse one 
-						Digraph<String> graphContainsEdgeRemove = new Digraph<String>(graphToFix);
-						Digraph<String> graphContainsEdgeReverse = new Digraph<String>(graphToFix);
+						Digraph<String> graphContainsEdgeRemove = isCopyOf(graphToFix);
+						Digraph<String> graphContainsEdgeReverse = isCopyOf(graphToFix);
 						graphContainsEdgeReverse.remove(da.getVl().get(i), da.getVl().get(j));
 						graphContainsEdgeRemove.reverse(da.getVl().get(i), da.getVl().get(j));
 						if(!TABU.contains(graphContainsEdgeRemove)){
@@ -49,7 +49,7 @@ public class Learn {
 					}
 //					if t doesn't contains i->j, try to add one 
 					else{
-						Digraph<String> graphNotContainsEdgeAdd = new Digraph<String>(graphToFix);
+						Digraph<String> graphNotContainsEdgeAdd = isCopyOf(graphToFix);
 						graphNotContainsEdgeAdd.add(da.getVl().get(i), da.getVl().get(j));
 						if(graphNotContainsEdgeAdd.isDag()&&!TABU.contains(graphNotContainsEdgeAdd)){
 							temp.put(graphNotContainsEdgeAdd, null);
@@ -68,7 +68,8 @@ public class Learn {
 			while (entries.hasNext()) {  
 			    Map.Entry<Digraph<String>, Double> entry = entries.next();
 //			    To score 
-			    double score = llscore(da.getCore(),entry.getKey());
+			    llscore getScore = new llscore(da,entry.getKey());
+			    double score = getScore.resultOfScore();
 			    entry.setValue(score);
 			    if(entry.getValue()>max){
 			    	Npp=entry.getKey();
@@ -97,6 +98,11 @@ public class Learn {
 			Np=Npp;
 		}
 		return Nres; 
+	}
+	
+	public static Digraph<String> isCopyOf(Digraph<String> org){
+		Digraph<String> NewGraph = new Digraph<String>(org);
+		return NewGraph;
 	}
 	
 	public Digraph<String> dagGen(Digraph<String> ini,List<String> Vl){
