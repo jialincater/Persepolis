@@ -5,7 +5,6 @@ import java.util.List;
 
 
 public class llscore extends scoringfunction{
-	private int shift = 97;
 	private int parent=0;
 
 	llscore(data data1, Digraph<String> digraph1){
@@ -14,7 +13,7 @@ public class llscore extends scoringfunction{
 		qll=new int[numberOfNode];
 		
 		for (int n = 0 ; n < numberOfNode ; n++){
-			List<String> ls= digraph1.getPais(""+(char)(n+shift));
+			List<String> ls= digraph1.getPais(data1.getVl().get(n));
 			int[] arrayOfParents = new int[ls.size()];
 
 			Iterator<String> iterls = ls.iterator();
@@ -25,7 +24,13 @@ public class llscore extends scoringfunction{
 				qll[n]=1;
 				for(int aop=0;aop<ls.size();aop++){
 					String parents = iterls.next();
-					parent = parents.charAt(0)-shift;
+					int index=0;
+					String[] dvl = data1.getDVl();
+					while(dvl[index]!=parents){
+						index++;
+					}
+					parent=index;
+//					parent = parents.charAt(0)-shift;
 					arrayOfParents[aop]=parent;
 					qll[n]*=rll[parent];
 					
@@ -71,7 +76,7 @@ public class llscore extends scoringfunction{
 				for(int k=0;k<rll[i];k++){
 					counts[i][j]+=count[i][j][k];	
 				}
-				totalNumber++;
+//				totalNumber++;
 //				System.out.println(totalNumber + " " +counts[i][j]);
 			}
 		}
@@ -86,7 +91,7 @@ public class llscore extends scoringfunction{
 						continue;
 					}
 					else
-						llscore=llscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log10(2);
+						llscore=llscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log(2);
 				}
 			}
 		}
