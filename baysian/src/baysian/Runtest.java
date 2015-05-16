@@ -18,6 +18,8 @@ public final class Runtest
     	data train = new data("/Users/Cater/Desktop/train-data.csv");
     	Digraph<String> ini = train.genBNGraph();
     	train.setR();
+    	Digraph<String> Dini = train.genDBNGraph();
+  
  
     	Learn Xuexi = new Learn();
     	Digraph<String> res = Xuexi.learnBNStructures(ini, train, 100);

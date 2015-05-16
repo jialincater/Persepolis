@@ -118,6 +118,7 @@ public class Learn {
 	To Learn a Dynamic Baysian Network
 	*/
 	public Digraph<String> learnDBNStructures(Digraph<String> Nini, data da, int restime){
+		int thatIsWhatICallN = da.getN();
 //		Nini is a Digraph that without any edge
 		Digraph<String> Nres = Nini;
 		Double Sres=Double.NEGATIVE_INFINITY;
@@ -135,10 +136,10 @@ public class Learn {
 			Digraph<String> graphToFix = isCopyOf(Np);
 //			Have a N-times Loop
 //			Fix every Vertex each time
-			for(int i =0;i!=da.getN();++i){	
+			for(int i =0;i!=thatIsWhatICallN*2;++i){	
 //				Have a N-times Loop
 //				Fix every Vertex each time
-				for(int j=0;j!=da.getN();j++){
+				for(int j=thatIsWhatICallN;j!=2*thatIsWhatICallN;j++){
 //					if i == j, it must not be a DAG
 					if(i==j)	continue;
 //					Test if t contains the edge i->j
