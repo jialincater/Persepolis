@@ -20,10 +20,19 @@ public final class Runtest
  
     	Learn Xuexi = new DLearn();
 //    	System.out.println(Xuexi.dagGen(Dini, train.getDVl()));
-    	Digraph<String> res = Xuexi.learnStructures(Dini, train, 10);
+    	Digraph<String> res = Xuexi.learnStructures(Dini, train, 1);
 //    	llscore ll = new llscore(train,ini);
 //    	System.out.println("llscore for the data : " + ll.resultOfScore());
-//    	dyllscore dyll = new dyllscore(train,Dini);
+    	dyllscore dyll = new dyllscore(train,res);
+    	parameterLearning Pl = new parameterLearning(dyll,train);
+    	for(int i = 0;i!=train.getN()*2;++i){
+    		for(int j=0;j!=dyll.getDyqll()[i];++j){
+    			for(int k=0;k!=dyll.getDyrll()[i];++k){
+    				System.out.println(Pl.getTheta(i, j, k));
+    			}
+    		}
+    	}
+    	
 //    	System.out.println("dyllscore for the data : " + dyll.resultOfScore());
 //    	dymdlscore dymdl = new dymdlscore(train,Dini,dyll.getDyllscore(),dyll.getDyqll());
 //    	System.out.println("dymdlscore for the data : " + dymdl.resultOfScore() );
@@ -34,7 +43,7 @@ public final class Runtest
 //    	System.out.println(ll.resultOfScore());
 //    	System.out.println(Arrays.toString(train.getR()));
 //    	System.out.println(cal(ini,train));
-    	System.out.println(res);
+//    	System.out.println(res);
     }
 	
 	public static double cal(Digraph<String> ini,data da){

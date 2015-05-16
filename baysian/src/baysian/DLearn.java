@@ -85,9 +85,10 @@ public class DLearn extends Learn{
 			    System.out.println(entry.getKey());
 		    	dyllscore dyll = new dyllscore(da,entry.getKey());
 //		    	System.out.println("dyllscore for the data : " + dyll.resultOfScore());
-		    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),dyll.getDyllscore(),dyll.getDyqll());
+//		    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),dyll.getDyllscore(),dyll.getDyqll());
 //		    	System.out.println("dymdlscore for the data : " + dymdl.resultOfScore() );
 			    double rsc = dyll.resultOfScore();
+//			    rsc = dymdl.resultOfScore();
 			    System.out.println("Score:"+ rsc);
 			    entry.setValue(rsc);
 			    if(entry.getValue()>max){

@@ -101,4 +101,12 @@ public class dyllscore extends scoringfunction{
 		}
 		return dyllscore;
 	}
+	
+	public int getCount(int i,int j,int k){
+		return count[i][j][k];
+	}
+	
+	public int getCounts(int i,int j){
+		return counts[i][j];
+	}
 }
