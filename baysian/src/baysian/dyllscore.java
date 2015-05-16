@@ -41,8 +41,8 @@ public class dyllscore extends scoringfunction{
 //				System.out.println("qll["+n+"]="+qll[n]);
 			}
 				
-			totalNumber = 2*data1.getDcore().size();
-			for(int i=1;i<totalNumber/2;i++){
+			totalNumber = data1.getDcore().size();
+			for(int i=0;i<totalNumber;i++){
 					firstParameter=n;
 					if(ls.size()==0){
 						secondParameter=0;
@@ -62,6 +62,7 @@ public class dyllscore extends scoringfunction{
 							else
 								weight=1;
 							secondParameter+=coef*Math.pow(weight,ls.size()-p-1);
+						//	System.out.println(secondParameter);
 						}
 					}	
 					thirdParameter=data1.getDcore().get(i).get(n);
@@ -79,7 +80,7 @@ public class dyllscore extends scoringfunction{
 					counts[i][j]+=count[i][j][k];	
 				}
 //				totalNumber++;
-//				System.out.println(counts[i][j]);
+				//System.out.println(counts[i][j]);
 			}
 		}
 		
@@ -94,6 +95,7 @@ public class dyllscore extends scoringfunction{
 					}
 					else
 						dyllscore=dyllscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log(2);
+					//System.out.println(dyllscore);
 				}
 			}
 		}

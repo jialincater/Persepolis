@@ -87,7 +87,7 @@ public class DLearn extends Learn{
 //		    	System.out.println("dyllscore for the data : " + dyll.resultOfScore());
 		    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),dyll.getDyllscore(),dyll.getDyqll());
 //		    	System.out.println("dymdlscore for the data : " + dymdl.resultOfScore() );
-			    double rsc = dymdl.resultOfScore();
+			    double rsc = dyll.resultOfScore();
 			    System.out.println("Score:"+ rsc);
 			    entry.setValue(rsc);
 			    if(entry.getValue()>max){
@@ -137,7 +137,7 @@ public class DLearn extends Learn{
 				break;
 			}
 			int x=(int)(Math.random()*N),y=(int)(Math.random()*N);
-			if(Res.getPais(Vl.get(y)).size()>=3){
+			if(Res.getPais(Vl.get(y)).size()>=3||Res.getPais(Vl.get(x)).size()>=3){
 				i--;
 				continue;
 			}

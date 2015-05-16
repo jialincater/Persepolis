@@ -12,14 +12,15 @@ public final class Runtest
 	}
 	public static void main(String [] args) throws IOException
     {
-    	data train = new data("/Users/Cater/Desktop/train-data.csv");
+    	data train = new data("/Users/Cater/Desktop/train-data-2.csv");
     	Digraph<String> ini = train.genBNGraph();
     	train.setR();
     	Digraph<String> Dini = train.genDBNGraph();
 //    	System.out.println(Dini);
  
     	Learn Xuexi = new DLearn();
-    	Digraph<String> res = Xuexi.learnStructures(Dini, train, 100);
+//    	System.out.println(Xuexi.dagGen(Dini, train.getDVl()));
+    	Digraph<String> res = Xuexi.learnStructures(Dini, train, 10);
 //    	llscore ll = new llscore(train,ini);
 //    	System.out.println("llscore for the data : " + ll.resultOfScore());
 //    	dyllscore dyll = new dyllscore(train,Dini);

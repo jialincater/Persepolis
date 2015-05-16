@@ -50,6 +50,7 @@ public class data {
 			p=0;
 			for(String s:lstr){
 				int j = p%N;
+				s=s.trim();
 				hstr.get(j).add(Integer.parseInt(s));
 				++p;
 			}
@@ -125,7 +126,13 @@ public class data {
    	 		for(int i=0;i!=temp.size()/N-1;++i){
    	   	 		List<Integer> li = new ArrayList<Integer>();
    	 			for(int j=0;j!=2*N;++j){
-   	 				li.add(Integer.parseInt(temp.get(j+i*N)));
+   	 				String Sp = temp.get(j+i*N);
+   	 				Sp = Sp.trim();
+//   	 				System.out.println(Sp);
+   	 				try{li.add(Integer.parseInt(Sp));}
+   	 				catch(NumberFormatException e){
+   	 					System.out.println(Sp);
+   	 				}
    	 			}
    	 			Dcore.add(li);
    	 		}

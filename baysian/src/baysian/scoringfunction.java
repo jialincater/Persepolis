@@ -9,8 +9,8 @@ public abstract class scoringfunction {
 	int numberOfNode;     
 	int totalNumber=0;
 	
-	int count[][][]=new int[10][100000][10];
-	int counts[][]=new int[10][100000];
+	int count[][][]=new int[15][10000][100];
+	int counts[][]=new int[15][10000];
 	protected int[] qll;
 	protected int[] dyqll;
 	public int[] getDyqll() {

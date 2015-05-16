@@ -12,7 +12,7 @@ public class dymdlscore extends scoringfunction{
 		}
 		this.dyllscore = dyllscore;
 		this.dyqll=dyqll;
-		this.totalNumber = 2*data1.getDcore().size();
+		this.totalNumber = data1.getDcore().size();
 	}
 	
 	public double resultOfScore() {
