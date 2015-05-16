@@ -25,14 +25,14 @@ public class data {
 	 * ONLY for debugging
 	 * Don't use that any way
 	 */
-	private String tString() {
-		String res="";
-		for(List<String> ls:core){
-			res+=ls;
-			res+="\n";
-		}
-		return res;
-	}
+//	private String tString() {
+//		String res="";
+//		for(List<String> ls:core){
+//			res+=ls;
+//			res+="\n";
+//		}
+//		return res;
+//	}
 	
 	/*
 	 * Like a 2nd constructor
@@ -182,13 +182,13 @@ public class data {
 	 * I think No one use that
 	 * DEBUG ONLY
 	 */
-	private ArrayList<Integer> getDataSize(){
-		ArrayList<Integer> ilist= new ArrayList<Integer>();
-		for(List<String> lst:core){
-			ilist.add(lst.size());
-		}
-		return ilist;
-	}
+//	private ArrayList<Integer> getDataSize(){
+//		ArrayList<Integer> ilist= new ArrayList<Integer>();
+//		for(List<String> lst:core){
+//			ilist.add(lst.size());
+//		}
+//		return ilist;
+//	}
 	
 	/*
 	 * To get the Core data which is read directly from csv file
