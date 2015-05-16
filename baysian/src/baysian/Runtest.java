@@ -1,9 +1,6 @@
 package baysian;
 
 import java.lang.String;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.io.*;
 
 
@@ -19,10 +16,10 @@ public final class Runtest
     	Digraph<String> ini = train.genBNGraph();
     	train.setR();
     	Digraph<String> Dini = train.genDBNGraph();
-  
+//    	System.out.println(Dini);
  
     	Learn Xuexi = new Learn();
-    	Digraph<String> res = Xuexi.learnBNStructures(ini, train, 100);
+    	Digraph<String> res = Xuexi.learnDBNStructures(Dini, train, 100);
     	
 //    	ini.add("b", "c");
 //    	ini.add("c", "b");

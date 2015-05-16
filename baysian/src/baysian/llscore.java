@@ -25,8 +25,8 @@ public class llscore extends scoringfunction{
 				for(int aop=0;aop<ls.size();aop++){
 					String parents = iterls.next();
 					int index=0;
-					String[] dvl = data1.getDVl();
-					while(dvl[index]!=parents){
+					List<String> dvl = data1.getDVl();
+					while(dvl.get(index)!=parents){
 						index++;
 					}
 					parent=index;

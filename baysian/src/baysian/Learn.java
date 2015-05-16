@@ -94,7 +94,7 @@ public class Learn {
 //				random restart assign Np a random value
 				if(timeCNT <restime){
 					timeCNT++;
-					Np=dagGen(Nini,da.getVl());
+					Np=dagBNGen(Nini,da.getVl());
 					SNp = Double.NEGATIVE_INFINITY;
 				    System.out.println("Restart:"+timeCNT);
 					continue;
@@ -119,6 +119,7 @@ public class Learn {
 	*/
 	public Digraph<String> learnDBNStructures(Digraph<String> Nini, data da, int restime){
 		int thatIsWhatICallN = da.getN();
+		List<String> thatIsWhatICallDVL = da.getDVl();
 //		Nini is a Digraph that without any edge
 		Digraph<String> Nres = Nini;
 		Double Sres=Double.NEGATIVE_INFINITY;
@@ -143,12 +144,12 @@ public class Learn {
 //					if i == j, it must not be a DAG
 					if(i==j)	continue;
 //					Test if t contains the edge i->j
-					else if(graphToFix.contains(da.getVl().get(i),da.getVl().get(j))){
+					else if(graphToFix.contains(thatIsWhatICallDVL.get(i),thatIsWhatICallDVL.get(j))){
 //						if t contains i->j, try to delete or reverse one 
 						Digraph<String> graphContainsEdgeRemove = isCopyOf(graphToFix);
 						Digraph<String> graphContainsEdgeReverse = isCopyOf(graphToFix);
-						graphContainsEdgeReverse.remove(da.getVl().get(i), da.getVl().get(j));
-						graphContainsEdgeRemove.reverse(da.getVl().get(i), da.getVl().get(j));
+						graphContainsEdgeReverse.remove(thatIsWhatICallDVL.get(i), thatIsWhatICallDVL.get(j));
+						graphContainsEdgeRemove.reverse(thatIsWhatICallDVL.get(i), thatIsWhatICallDVL.get(j));
 						if(graphContainsEdgeRemove.isDag()&&!TABU.contains(graphContainsEdgeRemove)){
 //							System.out.println(graphContainsEdgeRemove);
 							temp.put(graphContainsEdgeRemove, null);
@@ -163,7 +164,7 @@ public class Learn {
 //					if t doesn't contains i->j, try to add one 
 					else{
 						Digraph<String> graphNotContainsEdgeAdd = isCopyOf(graphToFix);
-						graphNotContainsEdgeAdd.add(da.getVl().get(i), da.getVl().get(j));
+						graphNotContainsEdgeAdd.add(thatIsWhatICallDVL.get(i), thatIsWhatICallDVL.get(j));
 						if(graphNotContainsEdgeAdd.isDag()&&!TABU.contains(graphNotContainsEdgeAdd)){
 //							System.out.println(graphNotContainsEdgeAdd);
 							temp.put(graphNotContainsEdgeAdd, null);
@@ -205,7 +206,7 @@ public class Learn {
 //				random restart assign Np a random value
 				if(timeCNT <restime){
 					timeCNT++;
-					Np=dagGen(Nini,da.getVl());
+					Np=dagDBNGen(Nini,thatIsWhatICallDVL);
 					SNp = Double.NEGATIVE_INFINITY;
 				    System.out.println("Restart:"+timeCNT);
 					continue;
@@ -229,7 +230,7 @@ public class Learn {
 		return NewGraph;
 	}
 	
-	public Digraph<String> dagGen(Digraph<String> ini,List<String> Vl){
+	public Digraph<String> dagBNGen(Digraph<String> ini,List<String> Vl){
 		Digraph<String> Res = ini;
 		int N = ini.neighbors.size();
 		int CNT = 0;
@@ -247,6 +248,63 @@ public class Learn {
 				else{
 					i--;
 					continue;
+				}
+				if(false==Res.isDag()){
+					Res.remove(Vl.get(x), Vl.get(y));
+					i--;
+				}
+			}
+			else{
+				i--;
+				continue;
+			}
+		}
+		return Res;
+	}
+	
+	public Digraph<String> dagDBNGen(Digraph<String> ini,List<String> Vl){
+		Digraph<String> Res = ini;
+		int N = ini.neighbors.size();
+		int CNT = 0;
+		int NumberOfEdge = (int)(Math.random()*(N*N-N)/4);
+		for(int i =0;i!=NumberOfEdge;++i){
+			CNT++;
+			if(CNT>500){
+				break;
+			}
+			int x=(int)(Math.random()*N),y=(int)(Math.random()*N);
+//			System.out.println(x+" "+y);
+			if(x!=y){
+				if(x<N/2&&y<N/2){
+					i--;
+					continue;
+				}
+				else if (x<N/2&&y>=N/2){
+					if(!Res.contains(Vl.get(x), Vl.get(y))){
+						Res.add(Vl.get(x), Vl.get(y));
+					}
+					else{
+						i--;
+						continue;
+					}
+				}
+				else if(x>=N/2&&y<N/2){
+					if(!Res.contains(Vl.get(y), Vl.get(x))){
+						Res.add(Vl.get(y), Vl.get(x));
+					}
+					else{
+						i--;
+						continue;
+					}
+				}
+				else{
+					if(!Res.contains(Vl.get(y), Vl.get(x))){
+						Res.add(Vl.get(y), Vl.get(x));
+					}
+					else{
+						i--;
+						continue;
+					}
 				}
 				if(false==Res.isDag()){
 					Res.remove(Vl.get(x), Vl.get(y));
