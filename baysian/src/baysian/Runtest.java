@@ -12,7 +12,7 @@ public final class Runtest
 	}
 	public static void main(String [] args) throws IOException
     {
-    	data train = new data("/Users/Cater/Desktop/train-data-2.csv");
+    	data train = new data("/Users/Cater/Desktop/train-data.csv");
     	Digraph<String> ini = train.genBNGraph();
     	train.setR();
     	Digraph<String> Dini = train.genDBNGraph();
@@ -20,19 +20,22 @@ public final class Runtest
  
     	Learn Xuexi = new DLearn();
 //    	System.out.println(Xuexi.dagGen(Dini, train.getDVl()));
-    	Digraph<String> res = Xuexi.learnStructures(Dini, train, 1);
+    	Digraph<String> res = Xuexi.learnStructures(Dini, train,0);
 //    	llscore ll = new llscore(train,ini);
 //    	System.out.println("llscore for the data : " + ll.resultOfScore());
     	dyllscore dyll = new dyllscore(train,res);
+//    	dymdlscore dymdl = new dymdlscore(train,res,dyll.getDyllscore(),dyll.getDyqll());
+
     	parameterLearning Pl = new parameterLearning(dyll,train);
-    	for(int i = 0;i!=train.getN()*2;++i){
-    		for(int j=0;j!=dyll.getDyqll()[i];++j){
-    			for(int k=0;k!=dyll.getDyrll()[i];++k){
-    				System.out.println(Pl.getTheta(i, j, k));
-    			}
-    		}
-    	}
-    	
+//    	for(int i = 0;i!=train.getN()*2;++i){
+//    		for(int j=0;j!=dyll.getDyqll()[i];++j){
+//    			for(int k=0;k!=dyll.getDyrll()[i];++k){
+//    				System.out.println(Pl.getTheta(i, j, k));
+//    			}
+//    		}
+//    	}
+    	inference inf = new inference("/Users/Cater/Desktop/test-data.csv");
+    	System.out.println(inf.predict(1, dyll, train, Pl, res));
 //    	System.out.println("dyllscore for the data : " + dyll.resultOfScore());
 //    	dymdlscore dymdl = new dymdlscore(train,Dini,dyll.getDyllscore(),dyll.getDyqll());
 //    	System.out.println("dymdlscore for the data : " + dymdl.resultOfScore() );

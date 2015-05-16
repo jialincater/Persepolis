@@ -13,6 +13,7 @@ public class dyllscore extends scoringfunction{
 		dyrll = new int[2*numberOfNode];
 		for(int i = 0 ; i<2*numberOfNode ; i++){
 			dyrll[i]=rll[i%numberOfNode];
+//			totalNumber+=totalNumber + dyrll[i];
 		}
 		dyqll=new int[2*numberOfNode];
 		
@@ -39,10 +40,8 @@ public class dyllscore extends scoringfunction{
 					
 				}
 //				System.out.println("qll["+n+"]="+qll[n]);
-			}
-				
-			totalNumber = data1.getDcore().size();
-			for(int i=0;i<totalNumber;i++){
+			}		
+			for(int i=0;i< data1.getDcore().size();i++){
 					firstParameter=n;
 					if(ls.size()==0){
 						secondParameter=0;
