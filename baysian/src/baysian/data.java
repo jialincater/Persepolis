@@ -12,6 +12,11 @@ public class data {
 	private List< List<String> > core;
 	private List< List<Integer> > Dcore=new ArrayList< List<Integer> >();
 	private List<String> Vl = new ArrayList<String>();
+	private String[] DVl;
+	public String[] getDVl() {
+		return DVl;
+	}
+
 	private int N;
 	private int r[];
 	
@@ -92,6 +97,10 @@ public class data {
 	 * Generate a BN Graph
 	 * NOT DBN
 	 * Only have N vertex
+	 * 
+	 * Generate N HERE
+	 * 
+	 * Also generate Dcore...
 	 */
 	public Digraph<String> genBNGraph(){
 		Digraph<String> Vgraph = new Digraph<String>();
@@ -108,7 +117,7 @@ public class data {
 			}
 			else break;
 		}
-		
+		// method to generate Dcore, important to call every time!
 		ListIterator<List<String>> lis = core.listIterator(); 
    	 	lis.next();
    	 	while(lis.hasNext()){
@@ -122,6 +131,27 @@ public class data {
    	 		}
    	 	}
 		return Vgraph;
+	}
+	/*
+	 * Please Use this function after N is generated
+	 * Use it after genBNGraph()
+	 * 
+	 * To generate a DBNGraph
+	 */
+	public Digraph<String> genDBNGraph(){
+		 DVl= new String[N*2];
+		 Digraph<String> Dig = new Digraph<String>();
+		 for(int i=0;i!=N;++i){
+			 DVl[i]=Vl.get(i);
+		 }
+		 for(int i=0;i!=N;++i){
+			 DVl[i+N]=Vl.get(i)+'*';
+		 }
+		 
+		 for(int i=0;i!=2*N;++i){
+			 Dig.add(DVl[i]);
+		 }
+		 return Dig;
 	}
 	
 	/*
