@@ -58,6 +58,9 @@ public class DLearn extends Learn{
 					else{
 						Digraph<String> graphNotContainsEdgeAdd = isCopyOf(graphToFix);
 						graphNotContainsEdgeAdd.add(thatIsWhatICallDVL.get(i), thatIsWhatICallDVL.get(j));
+						if(graphNotContainsEdgeAdd.getPais(thatIsWhatICallDVL.get(j)).size()>3){
+							continue;
+						}
 						if(graphNotContainsEdgeAdd.isDag()&&!TABU.contains(graphNotContainsEdgeAdd)){
 //							System.out.println(graphNotContainsEdgeAdd);
 							temp.put(graphNotContainsEdgeAdd, null);
@@ -134,6 +137,10 @@ public class DLearn extends Learn{
 				break;
 			}
 			int x=(int)(Math.random()*N),y=(int)(Math.random()*N);
+			if(Res.getPais(Vl.get(y)).size()>=3){
+				i--;
+				continue;
+			}
 //			System.out.println(x+" "+y);
 			if(x!=y){
 				if(x<N/2&&y<N/2){

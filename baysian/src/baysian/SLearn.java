@@ -88,6 +88,9 @@ public class SLearn extends Learn{
 					else{
 						Digraph<String> graphNotContainsEdgeAdd = isCopyOf(graphToFix);
 						graphNotContainsEdgeAdd.add(da.getVl().get(i), da.getVl().get(j));
+						if(graphNotContainsEdgeAdd.getPais(da.getVl().get(j)).size()>3){
+							continue;
+						}
 						if(graphNotContainsEdgeAdd.isDag()&&!TABU.contains(graphNotContainsEdgeAdd)){
 //							System.out.println(graphNotContainsEdgeAdd);
 							temp.put(graphNotContainsEdgeAdd, null);
