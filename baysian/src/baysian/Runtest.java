@@ -18,9 +18,14 @@ public final class Runtest
     	Digraph<String> Dini = train.genDBNGraph();
 //    	System.out.println(Dini);
  
-    	Learn Xuexi = new Learn();
-    	Digraph<String> res = Xuexi.learnDBNStructures(Dini, train, 100);
-    	
+    	Learn Xuexi = new DLearn();
+    	Digraph<String> res = Xuexi.learnStructures(Dini, train, 100);
+//    	llscore ll = new llscore(train,ini);
+//    	System.out.println("llscore for the data : " + ll.resultOfScore());
+//    	dyllscore dyll = new dyllscore(train,Dini);
+//    	System.out.println("dyllscore for the data : " + dyll.resultOfScore());
+//    	dymdlscore dymdl = new dymdlscore(train,Dini,dyll.getDyllscore(),dyll.getDyqll());
+//    	System.out.println("dymdlscore for the data : " + dymdl.resultOfScore() );
 //    	ini.add("b", "c");
 //    	ini.add("c", "b");
 //    	System.out.println(ini.isDag());

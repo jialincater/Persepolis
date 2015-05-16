@@ -4,24 +4,28 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class llscore extends scoringfunction{
+public class dyllscore extends scoringfunction{
 	private int parent=0;
 
-	llscore(data data1, Digraph<String> digraph1){
+	dyllscore(data data1, Digraph<String> digraph1){
 		rll = data1.getR();
 		numberOfNode = data1.getN();
-		qll=new int[numberOfNode];
+		dyrll = new int[2*numberOfNode];
+		for(int i = 0 ; i<2*numberOfNode ; i++){
+			dyrll[i]=rll[i%numberOfNode];
+		}
+		dyqll=new int[2*numberOfNode];
 		
-		for (int n = 0 ; n < numberOfNode ; n++){
-			List<String> ls= digraph1.getPais(data1.getVl().get(n));
+		for (int n = 0 ; n < 2*numberOfNode ; n++){
+			List<String> ls= digraph1.getPais(data1.getDVl().get(n));
 			int[] arrayOfParents = new int[ls.size()];
 
 			Iterator<String> iterls = ls.iterator();
 			if(ls.size()==0){
-				qll[n]=1;
+				dyqll[n]=1;
 			}
 			else{
-				qll[n]=1;
+				dyqll[n]=1;
 				for(int aop=0;aop<ls.size();aop++){
 					String parents = iterls.next();
 					int index=0;
@@ -31,15 +35,14 @@ public class llscore extends scoringfunction{
 					parent=index;
 //					parent = parents.charAt(0)-shift;
 					arrayOfParents[aop]=parent;
-					qll[n]*=rll[parent];
+					dyqll[n]*=dyrll[parent];
 					
 				}
 //				System.out.println("qll["+n+"]="+qll[n]);
 			}
 				
-			
-			for(int i=1;i<data1.getCore().size();i++){
-				for(int j=0;j<data1.getCore().get(i).size();j+=numberOfNode){
+			totalNumber = 2*data1.getDcore().size();
+			for(int i=1;i<totalNumber/2;i++){
 					firstParameter=n;
 					if(ls.size()==0){
 						secondParameter=0;
@@ -47,12 +50,12 @@ public class llscore extends scoringfunction{
 					else{
 						secondParameter=0;
 						for(int p=0;p<ls.size();p++){
-							int coef = Integer.parseInt(data1.getCore().get(i).get(arrayOfParents[p]+j));
+							int coef = data1.getDcore().get(i).get(arrayOfParents[p]);
 							int weight=1;
 							int pp=p;
 							if(pp+1<ls.size()){
 								while(pp+1<ls.size()){
-									weight *= rll[arrayOfParents[pp+1]];
+									weight *= dyrll[arrayOfParents[pp+1]];
 									pp++;
 								}
 							}
@@ -61,7 +64,7 @@ public class llscore extends scoringfunction{
 							secondParameter+=coef*Math.pow(weight,ls.size()-p-1);
 						}
 					}	
-					thirdParameter=Integer.parseInt(data1.getCore().get(i).get(n+j));
+					thirdParameter=data1.getDcore().get(i).get(n);
 					count[firstParameter][secondParameter][thirdParameter]++;
 //					System.out.println(firstParameter + " " +
 //										secondParameter + " " +
@@ -69,31 +72,31 @@ public class llscore extends scoringfunction{
 //										count[firstParameter][secondParameter][thirdParameter]);
 				}
 			}
-		}	
-		for(int i=0;i<numberOfNode;i++){
-			for(int j=0;j<qll[i];j++){
-				for(int k=0;k<rll[i];k++){
+		
+		for(int i=0;i<2*numberOfNode;i++){
+			for(int j=0;j<dyqll[i];j++){
+				for(int k=0;k<dyrll[i];k++){
 					counts[i][j]+=count[i][j][k];	
 				}
 //				totalNumber++;
-//				System.out.println(totalNumber + " " +counts[i][j]);
+//				System.out.println(counts[i][j]);
 			}
 		}
 		
 	}
 	
 	public double resultOfScore() {
-		for(int i=0;i<numberOfNode;i++){
-			for(int j=0;j<qll[i];j++){
-				for(int k=0;k<rll[i];k++){
+		for(int i=0;i<2*numberOfNode;i++){
+			for(int j=0;j<dyqll[i];j++){
+				for(int k=0;k<dyrll[i];k++){
 					if(count[i][j][k]==0){
 						continue;
 					}
 					else
-						llscore=llscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log(2);
+						dyllscore=dyllscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log(2);
 				}
 			}
 		}
-		return llscore;
+		return dyllscore;
 	}
 }

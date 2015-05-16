@@ -9,15 +9,35 @@ public abstract class scoringfunction {
 	int numberOfNode;     
 	int totalNumber=0;
 	
-	int count[][][]=new int[10][40][5];
-	int counts[][]=new int[10][40];
+	int count[][][]=new int[10][100000][10];
+	int counts[][]=new int[10][100000];
 	protected int[] qll;
+	protected int[] dyqll;
+	public int[] getDyqll() {
+		return dyqll;
+	}
+
 	protected int[] rll;
+	protected int[] dyrll;
+	public int[] getDyrll() {
+		return dyrll;
+	}
+
+	public double getDyllscore() {
+		return dyllscore;
+	}
+
+	public double getDymdlscore() {
+		return dymdlscore;
+	}
+
 	//Initialization the result of the scoring function
 	double llscore;
 	double mdlscore;
+	double dyllscore;
+	double dymdlscore;
 	
-		public int[] getQll() {
+	public int[] getQll() {
 		return qll;
 	}
 
@@ -35,6 +55,4 @@ public abstract class scoringfunction {
 	}
 	
 	public abstract double resultOfScore();
-
-
 }
