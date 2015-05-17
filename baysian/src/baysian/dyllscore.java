@@ -3,17 +3,24 @@ package baysian;
 import java.util.Iterator;
 import java.util.List;
 
-
+/**
+ * ll algorithm using in the dynamic Bayesian network
+ */
 public class dyllscore extends scoringfunction{
 	private int parent=0;
 
+	/**
+	 * Constructor
+	 * @param data1 train-data
+	 * @param digraph1 DAG
+	 */
 	dyllscore(data data1, Digraph<String> digraph1){
 		rll = data1.getR();
 		numberOfNode = data1.getN();
 		dyrll = new int[2*numberOfNode];
 		for(int i = 0 ; i<2*numberOfNode ; i++){
 			dyrll[i]=rll[i%numberOfNode];
-//			totalNumber+=totalNumber + dyrll[i];
+
 		}
 		dyqll=new int[2*numberOfNode];
 		
@@ -34,12 +41,12 @@ public class dyllscore extends scoringfunction{
 						index++;
 					}
 					parent=index;
-//					parent = parents.charAt(0)-shift;
+
 					arrayOfParents[aop]=parent;
 					dyqll[n]*=dyrll[parent];
 					
 				}
-//				System.out.println("qll["+n+"]="+qll[n]);
+
 			}		
 			for(int i=0;i< data1.getDcore().size();i++){
 					firstParameter=n;
@@ -60,17 +67,13 @@ public class dyllscore extends scoringfunction{
 							}
 							else
 								weight=1;
-							//secondParameter+=coef*Math.pow(weight,ls.size()-p-1);
+
 							secondParameter+=coef*weight;
-						//	System.out.println(secondParameter);
+
 						}
 					}	
 					thirdParameter=data1.getDcore().get(i).get(n);
 					count[firstParameter][secondParameter][thirdParameter]++;
-//					System.out.println(firstParameter + " " +
-//										secondParameter + " " +
-//										thirdParameter + " " +
-//										count[firstParameter][secondParameter][thirdParameter]);
 				}
 			}
 		
@@ -79,13 +82,14 @@ public class dyllscore extends scoringfunction{
 				for(int k=0;k<dyrll[i];k++){
 					counts[i][j]+=count[i][j][k];	
 				}
-//				totalNumber++;
-//				System.out.println(counts[i][j]);
 			}
 		}
 		
 	}
-	
+	/**
+	 * sum up all the count and counts by implementing the ll algorithm
+	 * @return value of dyllscore in dynamic Bayesian network
+	 */
 	public double resultOfScore() {
 		for(int i=0;i<2*numberOfNode;i++){
 			for(int j=0;j<dyqll[i];j++){

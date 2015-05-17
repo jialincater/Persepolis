@@ -2,9 +2,19 @@ package baysian;
 
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * jarRun has a main entrance that receive the input data in a standard way
+ * java -jar JARNAME.jar train test score randrest var
+ * @see	main
+ * @author Cater
+ *
+ */
 public class jarRun {
-
+	/**
+	 * main function that receive the input data in a standard way
+	 * @param args	train test score randrest var should be in args when call this main
+	 * @throws IOException just a exception
+	 */
 	public static void main(String[] args) throws IOException {
 //		For Inputs
 		if(args.length!=5){

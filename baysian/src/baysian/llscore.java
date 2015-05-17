@@ -3,12 +3,21 @@ package baysian;
 import java.util.Iterator;
 import java.util.List;
 
-
+/**
+ * ll algorithm using in the Bayesian network
+ */
 public class llscore extends scoringfunction{
 	private int parent=0;
+	private double result = 0.0;
 
+	/**
+	 * Constructor
+	 * @param train-data , DAG
+	 */
 	llscore(data data1, Digraph<String> digraph1){
+		//initialize the rll given the data
 		rll = data1.getR();
+		//initialize the number of nodes given the data
 		numberOfNode = data1.getN();
 		qll=new int[numberOfNode];
 		
@@ -17,6 +26,8 @@ public class llscore extends scoringfunction{
 			int[] arrayOfParents = new int[ls.size()];
 
 			Iterator<String> iterls = ls.iterator();
+			
+			//determine the number of parent configuration of each nodes
 			if(ls.size()==0){
 				qll[n]=1;
 			}
@@ -35,8 +46,8 @@ public class llscore extends scoringfunction{
 				}
 				
 			}
-//				System.out.println("qll["+n+"]="+qll[n]);
-			
+
+			// iterate each set of nodes,  determine the value of the count with three parameters.  
 			for(int i=1;i<data1.getCore().size();i++){
 				for(int j=0;j<data1.getCore().get(i).size();j+=numberOfNode){
 					firstParameter=n;
@@ -65,25 +76,25 @@ public class llscore extends scoringfunction{
 					miao = miao.trim();
 					thirdParameter=Integer.parseInt(miao);
 					count[firstParameter][secondParameter][thirdParameter]++;
-//					System.out.println(firstParameter + " " +
-//										secondParameter + " " +
-//										thirdParameter + " " +
-//										count[firstParameter][secondParameter][thirdParameter]);
 				}
 			}
 		}	
+		
+		//iterate each count,  determine the value of the count with three parameters.
 		for(int i=0;i<numberOfNode;i++){
 			for(int j=0;j<qll[i];j++){
 				for(int k=0;k<rll[i];k++){
 					counts[i][j]+=count[i][j][k];	
 				}
-//				totalNumber++;
-//				System.out.println(counts[i][j]);
 			}
 		}
 		
 	}
-	double result = 0.0;
+	
+	/**
+	 * sum up all the count and counts by implementing the ll algorithm
+	 * @return value of llscore in Bayesian network
+	 */
 	public double resultOfScore() {
 		for(int i=0;i<numberOfNode;i++){
 			for(int j=0;j<qll[i];j++){

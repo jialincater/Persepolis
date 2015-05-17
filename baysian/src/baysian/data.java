@@ -6,7 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-
+/**
+ * data class read the data from the file, 
+ * delete the spaces, 
+ * get out of the parameters.
+ * @author Cater
+ */
 public class data {
 
 	private List< List<String> > core;
@@ -38,7 +43,6 @@ public class data {
 	 * Like a 2nd constructor
 	 * should be use every time after you read the data
 	 * R is the value list of the 
-	 * @return      void, just setR
 	 * @author Cater
 	 */
 	public void setR(){
@@ -73,11 +77,12 @@ public class data {
 	}
 	
 	/**
-	 * Constructor...
+	 * Constructor that read the file
 	 * Read the train file and Initialize core
 	 * 
 	 * @param  path: The path where your train data exist
 	 * @author Cater
+	 * @throws	just throw a exception
 	 */
 	public data(String path) throws IOException{
 		core = new ArrayList< List<String> >();
@@ -113,7 +118,6 @@ public class data {
 	 * N which is the number of Nodes is also Initialized HERE
 	 * 
 	 * Also generate Dcore...
-	 * @param	None
 	 * @return	A Digraph of string that present the BN
 	 * @author Cater
 	 */
@@ -159,7 +163,6 @@ public class data {
 	 * Use it after genBNGraph()
 	 * 
 	 * To generate a DBNGraph
-	 * @param	None
 	 * @return	A Digraph of string that present the DBN
 	 * @author Cater
 	 */
@@ -182,7 +185,6 @@ public class data {
 	 * To get the Dcore data
 	 * Use By DBN Learning
 	 * 
-	 * @param	None
 	 * @return	A set of data that contains the regular data in form of int
 	 * @author Cater
 	 */
@@ -194,7 +196,6 @@ public class data {
 	 * To get Vl
 	 * Which is Vertex List
 	 * 
-	 * @param	None
 	 * @return	List of String contains Variable list
 	 * @author Cater
 	 */
@@ -206,7 +207,6 @@ public class data {
 	 * To get N
 	 * Which is number of vertex
 	 * 
-	 * @param	None
 	 * @return	Number of Vertex(Variable) in the data
 	 * @author Cater
 	 */
@@ -229,7 +229,6 @@ public class data {
 	/**
 	 * To get the Core data which is read directly from csv file
 	 * 
-	 * @param	None
 	 * @return	List of List of String that contains core
 	 * @author Cater
 	 */

@@ -9,13 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
-
+/**
+ * The implementation here is basically an adjacency list, but instead
+ * of an array of lists, a Map is used to map each vertex to its list of 
+ * adjacent vertices. 
+ *
+ * @param <V> is the data type that is in the vertex
+ */
 public class Digraph<V> {
     
     /**
-     * The implementation here is basically an adjacency list, but instead
-     * of an array of lists, a Map is used to map each vertex to its list of 
-     * adjacent vertices.
+
      */   
     public Map<V,List<V>> neighbors = new LinkedHashMap<V,List<V>>();
     
@@ -23,7 +27,6 @@ public class Digraph<V> {
      * Copy constructor
      * Run a DEEP COPY that make a copy of graph that will be use in the GHC
      * @param	np is the Digraph you want to copy
-     * @return	Null
      * @author Cater
      */
 	public Digraph(Digraph<V> np) {
@@ -37,8 +40,6 @@ public class Digraph<V> {
     /**
      * Normal constructor
      * Do Nothing
-     * @param	None
-     * @return	None
      * @author Cater
      */
 	public Digraph() {
@@ -57,7 +58,7 @@ public class Digraph<V> {
     
     /**
      * Add a vertex to the graph.  Nothing happens if vertex is already in graph.
-     * @param	V is the data that the vertex stores
+     * @param vertex	 is the data that the vertex stores
      */
     public void add (V vertex) {
         if (neighbors.containsKey(vertex)) return;
@@ -66,7 +67,7 @@ public class Digraph<V> {
     
     /**
      * True if graph contains vertex.
-     * @param	V represent the vertex you want to know if it is exist in the graph
+     * @param	vertex represent the vertex you want to know if it is exist in the graph
      * @return	true if the vertex is exist in the graph
      */
     public boolean contains (V vertex) {
@@ -92,7 +93,6 @@ public class Digraph<V> {
      * This implementation allows the creation of multi-edges and self-loops.
      * @param	from is the vertex that the edge from
      * @param	to is the vertex that the edge to
-     * @return	None
      */
     public void add (V from, V to) {
         this.add(from); this.add(to);
@@ -120,7 +120,6 @@ public class Digraph<V> {
      * @throws IllegalArgumentException if either vertex doesn't exist.
      * @param	from is the vertex that the edge from
      * @param	to is the vertex that the edge to
-     * @return	None
      */
     public void remove (V from, V to) {
         if (!(this.contains(from) && this.contains(to)))
@@ -131,7 +130,6 @@ public class Digraph<V> {
      * Reverse an edge from the graph.  Nothing happens if no such edge.
      * @param	from is the vertex that the edge from
      * @param	to is the vertex that the edge to
-     * @return	None
      * @author Cater
      */
     public void reverse (V from, V to) {
@@ -141,7 +139,6 @@ public class Digraph<V> {
     
     /**
      * Report (as a Map) the out-degree of each vertex.
-     * @param	None
      * @return	A map of V and Int
      */
     public Map<V,Integer> outDegree () {
@@ -152,7 +149,6 @@ public class Digraph<V> {
     
     /**
      * Report (as a Map) the in-degree of each vertex.
-     * @param	None
      * @return	A map of V and Int
      */
     public Map<V,Integer> inDegree () {
@@ -168,7 +164,6 @@ public class Digraph<V> {
     
     /**
      * Report (as a List) the topological sort of the vertices; null for no such sort.
-     * @param	None
      * @return	A list of V
      */
     public List<V> topSort () {
@@ -197,7 +192,6 @@ public class Digraph<V> {
     
     /**
      * True if graph is a dag (directed acyclic graph).
-     * @param	None
      * @return	boolean describe the graph is a DAG or not
      */
     public boolean isDag () {
@@ -208,6 +202,7 @@ public class Digraph<V> {
      * Report (as a Map) the bfs distance to each vertex from the start vertex.
      * The distance is an Integer; the value null is used to represent infinity
      * (implying that the corresponding node cannot be reached).
+     * @param start	just the starting Vertex
      */
     public Map bfsDistance (V start) {
         Map<V,Integer> distance = new HashMap<V,Integer>();

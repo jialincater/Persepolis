@@ -1,24 +1,45 @@
 package baysian;
-
+/**
+ * provide solutions to score the given structure using different scoring algorithms
+ * @author A.Cleverley
+ *
+ */
 public abstract class scoringfunction {
 	
-	int firstParameter;   
-	int secondParameter;
-	int thirdParameter;
+	int firstParameter;     //first parameter in the count
+	int secondParameter;	//second parameter in the count
+	int thirdParameter;	 	//third parameter in the count
 	
 	int numberOfNode;     
 	int totalNumber=0;
 	
-	int count[][][]=new int[15][10000][100];
-	int counts[][]=new int[15][10000];
-	protected int[] qll;
-	protected int[] dyqll;
+
+	int count[][][];
+	int counts[][];
+	
+	protected int[] qll;	//number of parent configurations of each nodes in bayesian network
+	protected int[] dyqll;	//number of parent configurations of each nodes in dynamic bayesian network
+	protected int[] rll;	//number of different values of each nodes in bayesian network
+	protected int[] dyrll;	//number of different values of each nodes in dynamic bayesian network
+	
+	//Initialization the result of different kinds of scoring function
+	double llscore;
+	double mdlscore;
+	double dyllscore;
+	double dymdlscore;
+	
 	public int[] getDyqll() {
 		return dyqll;
 	}
+	
+	public int[] getQll() {
+		return qll;
+	}
 
-	protected int[] rll;
-	protected int[] dyrll;
+	public int[] getRll() {
+		return rll;
+	}
+
 	public int[] getDyrll() {
 		return dyrll;
 	}
@@ -30,22 +51,7 @@ public abstract class scoringfunction {
 	public double getDymdlscore() {
 		return dymdlscore;
 	}
-
-	//Initialization the result of the scoring function
-	double llscore;
-	double mdlscore;
-	double dyllscore;
-	double dymdlscore;
 	
-	public int[] getQll() {
-		return qll;
-	}
-
-	public int[] getRll() {
-		return rll;
-	}
-
-
 	public double getLlscore() {
 		return llscore;
 	}

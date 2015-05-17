@@ -21,7 +21,7 @@ public abstract class Learn {
 	/**
 	 * To copy a graph using the copy constructor
 	 * @param org	original Digraph to be copied
-	 * @return
+	 * @return	a copy of Digraph
 	 */
 	public static Digraph<String> isCopyOf(Digraph<String> org){
 		Digraph<String> NewGraph = new Digraph<String>(org);

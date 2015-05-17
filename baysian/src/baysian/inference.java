@@ -9,14 +9,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
+/**
+ * inference class that calculate inference
+ * and read test data
+ * @author Cater
+ */
 public class inference {
 	private List< List<String> > core;
 	private List<List<Integer>> Dcore;
 	/**
 	 * contructor that read the data from the test file
 	 * @param path	the path where your file locate
-	 * @throws IOException
+	 * @throws IOException	just throw it~
 	 * @author Cater
 	 */
 	public inference(String path) throws IOException{
