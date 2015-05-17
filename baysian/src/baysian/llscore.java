@@ -17,10 +17,20 @@ public class llscore extends scoringfunction{
 	llscore(data data1, Digraph<String> digraph1){
 		//initialize the rll given the data
 		rll = data1.getR();
+
 		//initialize the number of nodes given the data
 		numberOfNode = data1.getN();
 		qll=new int[numberOfNode];
-		
+		int max = 0;
+		for(int i = 1 ; i< numberOfNode ; i++){
+			if (rll[max]<rll[i]){
+//				System.out.println(rll[max]+" "+rll[i]);
+				max=i;
+			}
+		}
+//		System.out.println(max+ "  "+ rll[0]+" "+rll[1]+" "+rll[2]);
+		count = new int[numberOfNode][rll[max]*rll[max]*rll[max]][rll[max]];
+		counts = new int[numberOfNode][rll[max]*rll[max]*rll[max]];
 		for (int n = 0 ; n < numberOfNode ; n++){
 			List<String> ls= digraph1.getPais(data1.getVl().get(n));
 			int[] arrayOfParents = new int[ls.size()];

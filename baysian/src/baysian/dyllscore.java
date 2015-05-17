@@ -16,14 +16,22 @@ public class dyllscore extends scoringfunction{
 	 */
 	dyllscore(data data1, Digraph<String> digraph1){
 		rll = data1.getR();
+		
 		numberOfNode = data1.getN();
 		dyrll = new int[2*numberOfNode];
 		for(int i = 0 ; i<2*numberOfNode ; i++){
 			dyrll[i]=rll[i%numberOfNode];
 
 		}
+		int max = 0;
+		for(int i = 1 ; i< numberOfNode ; i++){
+			if (rll[max]<rll[i]){
+				max=i;
+			}
+		}
 		dyqll=new int[2*numberOfNode];
-		
+		count = new int[2*numberOfNode][rll[max]*rll[max]*rll[max]][rll[max]];
+		counts = new int[2*numberOfNode][rll[max]*rll[max]*rll[max]];
 		for (int n = 0 ; n < 2*numberOfNode ; n++){
 			List<String> ls= digraph1.getPais(data1.getDVl().get(n));
 			int[] arrayOfParents = new int[ls.size()];

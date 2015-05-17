@@ -150,7 +150,7 @@ public class data {
 //   	 				System.out.println(Sp);
    	 				try{li.add(Integer.parseInt(Sp));}
    	 				catch(NumberFormatException e){
-   	 					System.out.println(Sp);
+//   	 					System.out.println(Sp);
    	 				}
    	 			}
    	 			Dcore.add(li);
@@ -174,7 +174,7 @@ public class data {
 		 for(int i=0;i!=N;++i){
 			 DVl.add(Vl.get(i)+'*');
 		 }
-		 System.out.println(DVl);
+//		 System.out.println(DVl);
 		 for(int i=0;i!=2*N;++i){
 			 Dig.add(DVl.get(i));
 		 }
