@@ -47,7 +47,9 @@ public class llscore extends scoringfunction{
 					else{
 						secondParameter=0;
 						for(int p=0;p<ls.size();p++){
-							int coef = Integer.parseInt(data1.getCore().get(i).get(arrayOfParents[p]+j));
+							String sttemp = data1.getCore().get(i).get(arrayOfParents[p]+j);
+							sttemp = sttemp.trim();
+							int coef = Integer.parseInt(sttemp);
 							int weight=1;
 							int pp=p;
 							if(pp+1<ls.size()){
@@ -61,7 +63,9 @@ public class llscore extends scoringfunction{
 							secondParameter+=coef*Math.pow(weight,ls.size()-p-1);
 						}
 					}	
-					thirdParameter=Integer.parseInt(data1.getCore().get(i).get(n+j));
+					String ttemp = data1.getCore().get(i).get(n+j);
+					ttemp = ttemp.trim();
+					thirdParameter=Integer.parseInt(ttemp);
 					count[firstParameter][secondParameter][thirdParameter]++;
 //					System.out.println(firstParameter + " " +
 //										secondParameter + " " +
