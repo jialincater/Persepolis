@@ -7,6 +7,12 @@ public class jarRun {
 
 	public static void main(String[] args) throws IOException {
 //		For Inputs
+		if(args.length!=5){
+			System.out.println("Input invaild. Please follow the instructions:"
+					+ "\n         java -jar JARNAME.jar train test score randrest var");
+			System.exit(0);
+		}
+		
 		String trainDataPath = args[0];
 		String testDataPath = args[1];
 //		if SM is false, use LL; else use MDL
@@ -15,6 +21,9 @@ public class jarRun {
 			SM = false;
 		}else if(args[2].equals("MDL")){
 			SM = true;
+		}else{
+			System.out.println("Please choice 【LL】 or 【MDL】 as 3rd parameter.");
+			System.exit(0);
 		}
 		
 		
