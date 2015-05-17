@@ -50,15 +50,16 @@ public class inference {
 	
 	public List<Integer> predict(Integer var,dyllscore dyll,data train,parameterLearning pL,Digraph<String> digraph1){
 		List<String> DVl = train.getDVl();
-		System.out.println("Digraph::"+digraph1);
+		System.out.println(DVl);
+//		System.out.println("Digraph::"+digraph1);
 		String target = DVl.get(var+train.getN());
-		System.out.println("target::"+target);
+//		System.out.println("target::"+target);
 		List<String> parent = digraph1.getPais(target);
-		System.out.println("parents::"+parent);
+//		System.out.println("parents::"+parent);
 		List<Integer> resList = new ArrayList<Integer>();
 		for(int r = 0;r!=Dcore.size();++r){
 			List<Integer> indexLine = Dcore.get(r);
-			System.out.println("index::"+indexLine);
+//			System.out.println("index::"+indexLine);
 			List<Double> pList = new LinkedList<Double>();
 			for(int v=0;v!=dyll.getDyrll()[var];++v){
 				List<Integer> weight = new ArrayList<Integer>();
@@ -68,7 +69,7 @@ public class inference {
 				for(String str:parent){
 					NoP.add(DVl.indexOf(str));
 				}
-				System.out.println("    NoP::"+NoP);
+//				System.out.println("    NoP::"+NoP);
 				for(int givenParents=0;givenParents!=NoP.size();++givenParents){
 					if(NoP.get(givenParents)<train.getN()){
 						Integer e =indexLine.get(NoP.get(givenParents));
@@ -78,7 +79,7 @@ public class inference {
 						break;
 					}
 				}
-				System.out.println("    PValue::"+Pvalue);
+//				System.out.println("    PValue::"+Pvalue);
 				for(int z = 0;z!=NoP.size();++z){
 					int s =z;				
 					int temp = 1;
@@ -88,7 +89,7 @@ public class inference {
 					}
 					weight.add(temp);
 				}
-				System.out.println("    weight::"+weight);
+//				System.out.println("    weight::"+weight);
 //				weight.add(1);
 
 				
@@ -98,30 +99,38 @@ public class inference {
 				for(int c =0;c!=dis;++c){
 					time*=dyll.getDyrll()[weight.size()+c];
 				}
-				System.out.println("    time::"+time);
+//				System.out.println("    time::"+time);
 				double sumTheta = 0.0;
 				for(int pp=0;pp!=time;++pp){
 					int jj = 0;
 					for(int a=0;a!=Pvalue.size();++a){
 						jj+=weight.get(a)*Pvalue.get(a);
-						System.out.println("            jj::"+jj );
+//						System.out.println("            jj::"+jj );
 					}
-					System.out.println("            pp::"+pp );
+//					System.out.println("            pp::"+pp );
 					sumTheta+=pL.getTheta(var+train.getN(),jj+pp , v);
-					System.out.println("        sumTheta::"+pL.getTheta((var+train.getN()),jj+pp , v));
-					System.out.println("        ijk::"+(var+train.getN())+" "+(jj+pp)+" "+v );
+//					System.out.println("        sumTheta::"+pL.getTheta((var+train.getN()),jj+pp , v));
+//					System.out.println("        ijk::"+(var+train.getN())+" "+(jj+pp)+" "+v );
 				}
 				pList.add(sumTheta);
 			}
 			double max=Double.NEGATIVE_INFINITY;
-			int Nmax=0;
+//			int Nmax=0;
+			List<Integer> NmaxList = new LinkedList<Integer>();
 			for( int g =0;g!=pList.size();++g){
 				if(max<pList.get(g)){
-					Nmax=g;
+//					Nmax=g;
+					NmaxList.clear();
+					NmaxList.add(g);
 					max=pList.get(g);
+				}else if((int)(max*10)==(int)(pList.get(g)*10)){
+					System.out.println(max+" equals"+pList.get(g));
+					NmaxList.add(g);
 				}
 			}
-			resList.add(Nmax);
+			int num = (int)(NmaxList.size()*Math.random());
+			System.out.println(num+"  "+NmaxList.size());
+			resList.add(NmaxList.get(num));
 		}
 		
 		return resList;

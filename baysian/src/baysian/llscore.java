@@ -25,18 +25,17 @@ public class llscore extends scoringfunction{
 				for(int aop=0;aop<ls.size();aop++){
 					String parents = iterls.next();
 					int index=0;
-					while(data1.getDVl().get(index)!=parents){
+					while(data1.getVl().get(index)!=parents){
 						index++;
 					}
 					parent=index;
-//					parent = parents.charAt(0)-shift;
 					arrayOfParents[aop]=parent;
-					qll[n]*=rll[parent];
 					
+					qll[n]*=rll[parent];
 				}
-//				System.out.println("qll["+n+"]="+qll[n]);
-			}
 				
+			}
+//				System.out.println("qll["+n+"]="+qll[n]);
 			
 			for(int i=1;i<data1.getCore().size();i++){
 				for(int j=0;j<data1.getCore().get(i).size();j+=numberOfNode){
@@ -47,9 +46,8 @@ public class llscore extends scoringfunction{
 					else{
 						secondParameter=0;
 						for(int p=0;p<ls.size();p++){
-							String sttemp = data1.getCore().get(i).get(arrayOfParents[p]+j);
-							sttemp = sttemp.trim();
-							int coef = Integer.parseInt(sttemp);
+							String str = data1.getCore().get(i).get(arrayOfParents[p]+j);
+							int coef = Integer.parseInt(str.trim());
 							int weight=1;
 							int pp=p;
 							if(pp+1<ls.size()){
@@ -60,12 +58,12 @@ public class llscore extends scoringfunction{
 							}
 							else
 								weight=1;
-							secondParameter+=coef*Math.pow(weight,ls.size()-p-1);
+							secondParameter+=coef*weight;
 						}
 					}	
-					String ttemp = data1.getCore().get(i).get(n+j);
-					ttemp = ttemp.trim();
-					thirdParameter=Integer.parseInt(ttemp);
+					String miao = data1.getCore().get(i).get(n+j);
+					miao = miao.trim();
+					thirdParameter=Integer.parseInt(miao);
 					count[firstParameter][secondParameter][thirdParameter]++;
 //					System.out.println(firstParameter + " " +
 //										secondParameter + " " +
@@ -80,12 +78,12 @@ public class llscore extends scoringfunction{
 					counts[i][j]+=count[i][j][k];	
 				}
 //				totalNumber++;
-//				System.out.println(totalNumber + " " +counts[i][j]);
+//				System.out.println(counts[i][j]);
 			}
 		}
 		
 	}
-	
+	double result = 0.0;
 	public double resultOfScore() {
 		for(int i=0;i<numberOfNode;i++){
 			for(int j=0;j<qll[i];j++){
@@ -94,7 +92,8 @@ public class llscore extends scoringfunction{
 						continue;
 					}
 					else
-						llscore=llscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log(2);
+						result = Math.log((double)(count[i][j][k])/counts[i][j])/Math.log(2);
+						llscore=llscore+count[i][j][k]*result;
 				}
 			}
 		}

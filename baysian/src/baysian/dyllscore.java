@@ -60,7 +60,8 @@ public class dyllscore extends scoringfunction{
 							}
 							else
 								weight=1;
-							secondParameter+=coef*Math.pow(weight,ls.size()-p-1);
+							//secondParameter+=coef*Math.pow(weight,ls.size()-p-1);
+							secondParameter+=coef*weight;
 						//	System.out.println(secondParameter);
 						}
 					}	
@@ -79,7 +80,7 @@ public class dyllscore extends scoringfunction{
 					counts[i][j]+=count[i][j][k];	
 				}
 //				totalNumber++;
-				//System.out.println(counts[i][j]);
+//				System.out.println(counts[i][j]);
 			}
 		}
 		
@@ -93,7 +94,7 @@ public class dyllscore extends scoringfunction{
 						continue;
 					}
 					else
-						dyllscore=dyllscore+count[i][j][k]*Math.log10((double)(count[i][j][k])/counts[i][j])/Math.log(2);
+						dyllscore=dyllscore+count[i][j][k]*Math.log((double)(count[i][j][k])/counts[i][j])/Math.log(2);
 					//System.out.println(dyllscore);
 				}
 			}

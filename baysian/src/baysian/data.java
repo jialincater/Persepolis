@@ -111,6 +111,7 @@ public class data {
 			int len = s.length();
 			String c = s.substring(len-1, len);
 			String m = s.substring(0, len-2);
+			m=m.trim();
 			if(c.equals("0")){
 				Vgraph.add(m);
 				Vl.add(m);

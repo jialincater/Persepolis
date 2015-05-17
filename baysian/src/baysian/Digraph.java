@@ -3,6 +3,7 @@ package baysian;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class Digraph<V> {
      * of an array of lists, a Map is used to map each vertex to its list of 
      * adjacent vertices.
      */   
-    public Map<V,List<V>> neighbors = new HashMap<V,List<V>>();
+    public Map<V,List<V>> neighbors = new LinkedHashMap<V,List<V>>();
 
 	public Digraph(Digraph<V> np) {
 //		this.neighbors = new HashMap<V,List<V>>(np.neighbors);

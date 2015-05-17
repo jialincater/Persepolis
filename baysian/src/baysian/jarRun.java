@@ -27,8 +27,8 @@ public class jarRun {
 		}
 		
 		
-		trainDataPath = "/Users/Cater/Desktop/train-data-2.csv";
-		testDataPath = "/Users/Cater/Desktop/test-data-2.csv";
+//		trainDataPath = "/Users/Cater/Desktop/train-data.csv";
+//		testDataPath = "/Users/Cater/Desktop/test-data.csv";
 		
 		Integer randrest = Integer.parseInt(args[3]);
 		int var = Integer.parseInt(args[4]);
@@ -37,6 +37,7 @@ public class jarRun {
 		data train = new data(trainDataPath);
     	Digraph<String> ini = train.genBNGraph();
     	train.setR();
+    	
     	Digraph<String> Dini = train.genDBNGraph();
 
 //    	Learning BN

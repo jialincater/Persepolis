@@ -109,11 +109,11 @@ public class SLearn extends Learn{
 			while (entries.hasNext()) {  
 			    Map.Entry<Digraph<String>, Double> entry = entries.next();
 //			    To score 
-			    llscore getScore = new llscore(da,entry.getKey());
-			    double score = getScore.resultOfScore();
-			    if(SM ==true){
-			    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),getScore.getDyllscore(),getScore.getDyqll());
-				    score = dymdl.resultOfScore();
+			    llscore ll = new llscore(da,entry.getKey());
+			    double score = ll.resultOfScore();
+			    if(SM){
+			    	mdlscore mdl = new mdlscore(da,entry.getKey(),ll.resultOfScore(),ll.getQll());
+				    score = mdl.resultOfScore();
 			    }
 //			    mdlscore mscore = new mdlscore(da,entry.getKey(),getScore.getLlscore(),getScore.getQll(),getScore.getTotalNumber());
 //			    score = mscore.resultOfScore();

@@ -8,8 +8,8 @@ public class dymdlscore extends scoringfunction{
 		numberOfNode = data1.getN();
 		dyrll = new int[2*numberOfNode];
 		for(int i = 0 ; i<2*numberOfNode ; i++){
-			dyrll[i]=rll[i%3];
-			totalNumber+=totalNumber + dyrll[i];
+			dyrll[i]=rll[i%numberOfNode];
+			totalNumber=totalNumber + dyrll[i];
 		}
 		this.dyllscore = dyllscore;
 		this.dyqll=dyqll;
