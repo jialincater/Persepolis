@@ -23,9 +23,9 @@ public class parameterLearning {
 		for(int i=0;i<2*p_numberOfNode;i++){
 			for(int j=0;j<p_dyqll[i];j++){
 				for(int k=0;k<p_dyrll[i];k++){
-					
+					System.out.println("i:"+i+"j:"+j+"k:"+k);
 					theta[i][j][k]=(d1.getCount(i,j,k)+constN)/(d1.getCounts(i,j)+p_dyrll[i]*constN);
-//					System.out.println(theta[i][j][k]);
+					System.out.println(theta[i][j][k]);
 				}
 			}
 		}

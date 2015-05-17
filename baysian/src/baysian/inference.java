@@ -34,13 +34,13 @@ public class inference {
    	 		List<String> ls = ils.next();
    	 		List<Integer> Li = new ArrayList<Integer>();
    	 		for(String stl:ls){
-   	 			stl.trim();
+   	 			stl=stl.trim();
    	 			Li.add(Integer.parseInt(stl));
    	 		}
    	 		Dcore.add(Li);
    	 	}
    	 	
-   	 	System.out.println(Dcore);
+//   	 	System.out.println(Dcore);
 	}
 	
 	private static List<String> getFile( Path file) throws IOException{
@@ -50,11 +50,15 @@ public class inference {
 	
 	public List<Integer> predict(Integer var,dyllscore dyll,data train,parameterLearning pL,Digraph<String> digraph1){
 		List<String> DVl = train.getDVl();
+		System.out.println("Digraph::"+digraph1);
 		String target = DVl.get(var+train.getN());
+		System.out.println("target::"+target);
 		List<String> parent = digraph1.getPais(target);
+		System.out.println("parents::"+parent);
 		List<Integer> resList = new ArrayList<Integer>();
 		for(int r = 0;r!=Dcore.size();++r){
 			List<Integer> indexLine = Dcore.get(r);
+			System.out.println("index::"+indexLine);
 			List<Double> pList = new LinkedList<Double>();
 			for(int v=0;v!=dyll.getDyrll()[var];++v){
 				List<Integer> weight = new ArrayList<Integer>();
@@ -64,7 +68,7 @@ public class inference {
 				for(String str:parent){
 					NoP.add(DVl.indexOf(str));
 				}
-				
+				System.out.println("    NoP::"+NoP);
 				for(int givenParents=0;givenParents!=NoP.size();++givenParents){
 					if(NoP.get(givenParents)<train.getN()){
 						Integer e =indexLine.get(NoP.get(givenParents));
@@ -74,6 +78,7 @@ public class inference {
 						break;
 					}
 				}
+				System.out.println("    PValue::"+Pvalue);
 				for(int z = 0;z!=NoP.size();++z){
 					int s =z;				
 					int temp = 1;
@@ -83,6 +88,7 @@ public class inference {
 					}
 					weight.add(temp);
 				}
+				System.out.println("    weight::"+weight);
 //				weight.add(1);
 
 				
@@ -92,14 +98,18 @@ public class inference {
 				for(int c =0;c!=dis;++c){
 					time*=dyll.getDyrll()[weight.size()+c];
 				}
-				
-				double sumTheta = 0;
+				System.out.println("    time::"+time);
+				double sumTheta = 0.0;
 				for(int pp=0;pp!=time;++pp){
 					int jj = 0;
 					for(int a=0;a!=Pvalue.size();++a){
 						jj+=weight.get(a)*Pvalue.get(a);
+						System.out.println("            jj::"+jj );
 					}
-					sumTheta+=pL.getTheta(var,jj+pp , v);
+					System.out.println("            pp::"+pp );
+					sumTheta+=pL.getTheta(var+train.getN(),jj+pp , v);
+					System.out.println("        sumTheta::"+pL.getTheta((var+train.getN()),jj+pp , v));
+					System.out.println("        ijk::"+(var+train.getN())+" "+(jj+pp)+" "+v );
 				}
 				pList.add(sumTheta);
 			}
