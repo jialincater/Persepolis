@@ -82,7 +82,7 @@ public class DLearn extends Learn{
 			    
 //			    llscore ll = new llscore(da,entry.getKey());
 //		    	System.out.println("llscore for the data : " + ll.resultOfScore());
-			    System.out.println(entry.getKey());
+//			    System.out.println(entry.getKey());
 		    	dyllscore dyll = new dyllscore(da,entry.getKey());
 //		    	System.out.println("dyllscore for the data : " + dyll.resultOfScore());
 //		    	System.out.println("dymdlscore for the data : " + dymdl.resultOfScore() );
@@ -91,7 +91,7 @@ public class DLearn extends Learn{
 			    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),dyll.getDyllscore(),dyll.getDyqll());
 				    rsc = dymdl.resultOfScore();
 			    }
-			    System.out.println("Score:"+ rsc);
+//			    System.out.println("Score:"+ rsc);
 			    entry.setValue(rsc);
 			    if(entry.getValue()>max){
 			    	Npp=entry.getKey();
@@ -102,8 +102,8 @@ public class DLearn extends Learn{
 			if(max>SNp){
 				Np=Npp;
 				SNp=max;
-			    System.out.println("New local best: "+max);
-			    System.out.println(Np);
+//			    System.out.println("New local best: "+max);
+//			    System.out.println(Np);
 			}
 			else{
 //				random restart assign Np a random value
@@ -111,7 +111,7 @@ public class DLearn extends Learn{
 					timeCNT++;
 					Np=dagGen(Nini,thatIsWhatICallDVL);
 					SNp = Double.NEGATIVE_INFINITY;
-				    System.out.println("Restart:"+timeCNT);
+//				    System.out.println("Restart:"+timeCNT);
 					continue;
 				}
 				else{
@@ -119,8 +119,8 @@ public class DLearn extends Learn{
 				}
 			}
 			if(SNp>Sres){
-				System.out.println("NEW GLOBAL BEST: "+SNp);
-				System.out.println(Npp);
+//				System.out.println("NEW GLOBAL BEST: "+SNp);
+//				System.out.println(Npp);
 				Sres = SNp;
 				Nres = Npp;
 			}

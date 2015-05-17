@@ -50,7 +50,7 @@ public class inference {
 	
 	public List<Integer> predict(Integer var,dyllscore dyll,data train,parameterLearning pL,Digraph<String> digraph1){
 		List<String> DVl = train.getDVl();
-		System.out.println(DVl);
+//		System.out.println(DVl);
 //		System.out.println("Digraph::"+digraph1);
 		String target = DVl.get(var+train.getN());
 //		System.out.println("target::"+target);
@@ -123,13 +123,13 @@ public class inference {
 					NmaxList.clear();
 					NmaxList.add(g);
 					max=pList.get(g);
-				}else if((int)(max*10)==(int)(pList.get(g)*10)){
-					System.out.println(max+" equals"+pList.get(g));
+				}else if((int)(max*1000)==(int)(pList.get(g)*1000)){
+//					System.out.println(max+" equals"+pList.get(g));
 					NmaxList.add(g);
 				}
 			}
 			int num = (int)(NmaxList.size()*Math.random());
-			System.out.println(num+"  "+NmaxList.size());
+//			System.out.println(num+"  "+NmaxList.size());
 			resList.add(NmaxList.get(num));
 		}
 		

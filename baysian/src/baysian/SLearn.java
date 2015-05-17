@@ -18,6 +18,10 @@ public class SLearn extends Learn{
 				break;
 			}
 			int x=(int)(Math.random()*N),y=(int)(Math.random()*N);
+			if(Res.getPais(Vl.get(y)).size()>=3||Res.getPais(Vl.get(x)).size()>=3){
+				i--;
+				continue;
+			}
 			if(x!=y){
 				if(!Res.contains(Vl.get(x), Vl.get(y))){
 					Res.add(Vl.get(x), Vl.get(y));
@@ -109,6 +113,7 @@ public class SLearn extends Learn{
 			while (entries.hasNext()) {  
 			    Map.Entry<Digraph<String>, Double> entry = entries.next();
 //			    To score 
+//			    System.out.println(entry.getKey());
 			    llscore ll = new llscore(da,entry.getKey());
 			    double score = ll.resultOfScore();
 			    if(SM){
@@ -117,8 +122,8 @@ public class SLearn extends Learn{
 			    }
 //			    mdlscore mscore = new mdlscore(da,entry.getKey(),getScore.getLlscore(),getScore.getQll(),getScore.getTotalNumber());
 //			    score = mscore.resultOfScore();
-			    System.out.println("Score:"+score);
-			    System.out.println(entry.getKey());
+//			    System.out.println("Score:"+score);
+//			    System.out.println(entry.getKey());
 			    entry.setValue(score);
 			    if(entry.getValue()>max){
 			    	Npp=entry.getKey();
@@ -129,8 +134,8 @@ public class SLearn extends Learn{
 			if(max>SNp){
 				Np=Npp;
 				SNp=max;
-			    System.out.println("New local best: "+max);
-			    System.out.println(Np);
+//			    System.out.println("New local best: "+max);
+//			    System.out.println(Np);
 			}
 			else{
 //				random restart assign Np a random value
@@ -138,7 +143,7 @@ public class SLearn extends Learn{
 					timeCNT++;
 					Np=dagGen(Nini,da.getVl());
 					SNp = Double.NEGATIVE_INFINITY;
-				    System.out.println("Restart:"+timeCNT);
+//				    System.out.println("Restart:"+timeCNT);
 					continue;
 				}
 				else{
@@ -146,8 +151,8 @@ public class SLearn extends Learn{
 				}
 			}
 			if(SNp>Sres){
-				System.out.println("NEW GLOBAL BEST: "+SNp);
-				System.out.println(Npp);
+//				System.out.println("NEW GLOBAL BEST: "+SNp);
+//				System.out.println(Npp);
 				Sres = SNp;
 				Nres = Npp;
 			}
