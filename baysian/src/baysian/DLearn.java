@@ -10,7 +10,7 @@ public class DLearn extends Learn{
 	/*
 	To Learn a Dynamic Baysian Network
 	*/
-	public Digraph<String> learnStructures(Digraph<String> Nini, data da, int restime){
+	public Digraph<String> learnStructures(Digraph<String> Nini, data da, int restime, boolean SM){
 		int thatIsWhatICallN = da.getN();
 		List<String> thatIsWhatICallDVL = da.getDVl();
 //		Nini is a Digraph that without any edge
@@ -85,10 +85,12 @@ public class DLearn extends Learn{
 			    System.out.println(entry.getKey());
 		    	dyllscore dyll = new dyllscore(da,entry.getKey());
 //		    	System.out.println("dyllscore for the data : " + dyll.resultOfScore());
-//		    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),dyll.getDyllscore(),dyll.getDyqll());
 //		    	System.out.println("dymdlscore for the data : " + dymdl.resultOfScore() );
 			    double rsc = dyll.resultOfScore();
-//			    rsc = dymdl.resultOfScore();
+			    if(SM ==true){
+			    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),dyll.getDyllscore(),dyll.getDyqll());
+				    rsc = dymdl.resultOfScore();
+			    }
 			    System.out.println("Score:"+ rsc);
 			    entry.setValue(rsc);
 			    if(entry.getValue()>max){

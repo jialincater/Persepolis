@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Learn {	
 	
-	public abstract Digraph<String> learnStructures(Digraph<String> Nini, data da, int restime);
+	public abstract Digraph<String> learnStructures(Digraph<String> Nini, data da, int restime,boolean flag);
 	
 	public static Digraph<String> isCopyOf(Digraph<String> org){
 		Digraph<String> NewGraph = new Digraph<String>(org);

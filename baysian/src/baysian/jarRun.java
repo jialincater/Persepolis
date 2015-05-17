@@ -32,12 +32,12 @@ public class jarRun {
 
 //    	Learning BN
     	Learn SXuexi = new SLearn();
-    	Digraph<String> Sres = SXuexi.learnStructures(ini, train, randrest);
+    	Digraph<String> Sres = SXuexi.learnStructures(ini, train, randrest,SM);
     	
 //    	Learning DBN
     	Stopwatch sw = new Stopwatch();
     	Learn Xuexi = new DLearn();
-    	Digraph<String> Dres = Xuexi.learnStructures(Dini, train, randrest);
+    	Digraph<String> Dres = Xuexi.learnStructures(Dini, train, randrest,SM);
     	double TDBN = sw.elapsedTime();
 
 //    	Parameter Learning

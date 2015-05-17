@@ -42,7 +42,7 @@ public class SLearn extends Learn{
 	/*
 	To Learn a Baysian Network, not Dynamic
 	*/
-	public Digraph<String> learnStructures(Digraph<String> Nini, data da, int restime){
+	public Digraph<String> learnStructures(Digraph<String> Nini, data da, int restime,boolean SM){
 //		Nini is a Digraph that without any edge
 		Digraph<String> Nres = Nini;
 		Double Sres=Double.NEGATIVE_INFINITY;
@@ -111,6 +111,10 @@ public class SLearn extends Learn{
 //			    To score 
 			    llscore getScore = new llscore(da,entry.getKey());
 			    double score = getScore.resultOfScore();
+			    if(SM ==true){
+			    	dymdlscore dymdl = new dymdlscore(da,entry.getKey(),getScore.getDyllscore(),getScore.getDyqll());
+				    score = dymdl.resultOfScore();
+			    }
 //			    mdlscore mscore = new mdlscore(da,entry.getKey(),getScore.getLlscore(),getScore.getQll(),getScore.getTotalNumber());
 //			    score = mscore.resultOfScore();
 			    System.out.println("Score:"+score);
