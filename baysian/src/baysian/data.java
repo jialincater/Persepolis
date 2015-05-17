@@ -34,9 +34,12 @@ public class data {
 //		return res;
 //	}
 	
-	/*
+	/** 
 	 * Like a 2nd constructor
 	 * should be use every time after you read the data
+	 * R is the value list of the 
+	 * @return      void, just setR
+	 * @author Cater
 	 */
 	public void setR(){
 		int p=0;
@@ -60,16 +63,21 @@ public class data {
 		}
 	}
 	
-	/*
-	 * For get R
+	/** 
+	 * A method can get R
+	 * @return	int[] that saves R
+	 * @author Cater
 	 */
 	public int[] getR() {
 		return r;
 	}
 	
-	/*
+	/**
 	 * Constructor...
-	 * You need it...
+	 * Read the train file and Initialize core
+	 * 
+	 * @param  path: The path where your train data exist
+	 * @author Cater
 	 */
 	public data(String path) throws IOException{
 		core = new ArrayList< List<String> >();
@@ -85,23 +93,29 @@ public class data {
 	}
 	
 	
-	/*
+	/**
 	 * A function only used by constructor
 	 * So that's private~
+	 * @param	file: path that hold your file
+	 * @return	List of string that holds the data in file
+	 * @author Cater
 	 */
 	private static List<String> getFile( Path file) throws IOException{
 		List<String> hi  = Files.readAllLines(file, StandardCharsets.US_ASCII);
         return hi;
     }
 	
-	/*
+	/**
 	 * Generate a BN Graph
 	 * NOT DBN
 	 * Only have N vertex
 	 * 
-	 * Generate N HERE
+	 * N which is the number of Nodes is also Initialized HERE
 	 * 
 	 * Also generate Dcore...
+	 * @param	None
+	 * @return	A Digraph of string that present the BN
+	 * @author Cater
 	 */
 	public Digraph<String> genBNGraph(){
 		Digraph<String> Vgraph = new Digraph<String>();
@@ -140,11 +154,14 @@ public class data {
    	 	}
 		return Vgraph;
 	}
-	/*
+	/**
 	 * Please Use this function after N is generated
 	 * Use it after genBNGraph()
 	 * 
 	 * To generate a DBNGraph
+	 * @param	None
+	 * @return	A Digraph of string that present the DBN
+	 * @author Cater
 	 */
 	public Digraph<String> genDBNGraph(){
 		 Digraph<String> Dig = new Digraph<String>();
@@ -161,25 +178,37 @@ public class data {
 		 return Dig;
 	}
 	
-	/*
+	/**
 	 * To get the Dcore data
-	 * Use By DBN
+	 * Use By DBN Learning
+	 * 
+	 * @param	None
+	 * @return	A set of data that contains the regular data in form of int
+	 * @author Cater
 	 */
 	public List<List<Integer>> getDcore() {
 		return Dcore;
 	}
 	
-	/*
+	/**
 	 * To get Vl
 	 * Which is Vertex List
+	 * 
+	 * @param	None
+	 * @return	List of String contains Variable list
+	 * @author Cater
 	 */
 	public List<String> getVl() {
 		return Vl;
 	}
 	
-	/*
+	/**
 	 * To get N
 	 * Which is number of vertex
+	 * 
+	 * @param	None
+	 * @return	Number of Vertex(Variable) in the data
+	 * @author Cater
 	 */
 	public int getN() {
 		return N;
@@ -197,8 +226,12 @@ public class data {
 //		return ilist;
 //	}
 	
-	/*
+	/**
 	 * To get the Core data which is read directly from csv file
+	 * 
+	 * @param	None
+	 * @return	List of List of String that contains core
+	 * @author Cater
 	 */
 	public List<List<String>> getCore() {
 		return core;

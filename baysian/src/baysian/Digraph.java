@@ -18,7 +18,14 @@ public class Digraph<V> {
      * adjacent vertices.
      */   
     public Map<V,List<V>> neighbors = new LinkedHashMap<V,List<V>>();
-
+    
+    /**
+     * Copy constructor
+     * Run a DEEP COPY that make a copy of graph that will be use in the GHC
+     * @param	np is the Digraph you want to copy
+     * @return	Null
+     * @author Cater
+     */
 	public Digraph(Digraph<V> np) {
 //		this.neighbors = new HashMap<V,List<V>>(np.neighbors);
 		Iterator<HashMap.Entry<V, List<V>>> entries = np.neighbors.entrySet().iterator();  
@@ -27,13 +34,20 @@ public class Digraph<V> {
 		    this.neighbors.put(entry.getKey(), new ArrayList<V>(entry.getValue()));
 		}
 	}
-
+    /**
+     * Normal constructor
+     * Do Nothing
+     * @param	None
+     * @return	None
+     * @author Cater
+     */
 	public Digraph() {
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
      * String representation of graph.
+     * @return	a string that present the graph
      */
     public String toString () {
         StringBuffer s = new StringBuffer();
@@ -43,6 +57,7 @@ public class Digraph<V> {
     
     /**
      * Add a vertex to the graph.  Nothing happens if vertex is already in graph.
+     * @param	V is the data that the vertex stores
      */
     public void add (V vertex) {
         if (neighbors.containsKey(vertex)) return;
@@ -51,11 +66,19 @@ public class Digraph<V> {
     
     /**
      * True if graph contains vertex.
+     * @param	V represent the vertex you want to know if it is exist in the graph
+     * @return	true if the vertex is exist in the graph
      */
     public boolean contains (V vertex) {
         return neighbors.containsKey(vertex);
     }
 
+    /**
+     * True if graph contains edge.
+     * @param	from is the vertex that the edge from
+     * @param	to is the vertex that the edge to
+     * @return	true if the vertex is exist in the graph
+     */
     public boolean contains (V from,V to) {
         if(!neighbors.containsKey(from))
         	return false;
@@ -67,6 +90,9 @@ public class Digraph<V> {
     /**
      * Add an edge to the graph; if either vertex does not exist, it's added.
      * This implementation allows the creation of multi-edges and self-loops.
+     * @param	from is the vertex that the edge from
+     * @param	to is the vertex that the edge to
+     * @return	None
      */
     public void add (V from, V to) {
         this.add(from); this.add(to);
@@ -75,6 +101,9 @@ public class Digraph<V> {
     
     /**
      * Travel through the Graph and get the pais of the Vertex
+     * @param	v is the vertex that you want to find he's father
+     * @return	a List of v's father
+     * @author Cater
      */
     public List<V> getPais(V v){
     	List<V> lv = new LinkedList<V>();
@@ -89,6 +118,9 @@ public class Digraph<V> {
     /**
      * Remove an edge from the graph.  Nothing happens if no such edge.
      * @throws IllegalArgumentException if either vertex doesn't exist.
+     * @param	from is the vertex that the edge from
+     * @param	to is the vertex that the edge to
+     * @return	None
      */
     public void remove (V from, V to) {
         if (!(this.contains(from) && this.contains(to)))
@@ -97,7 +129,10 @@ public class Digraph<V> {
     }
     /**
      * Reverse an edge from the graph.  Nothing happens if no such edge.
-     * @throws IllegalArgumentException if either vertex doesn't exist.
+     * @param	from is the vertex that the edge from
+     * @param	to is the vertex that the edge to
+     * @return	None
+     * @author Cater
      */
     public void reverse (V from, V to) {
         neighbors.remove(from,to);
@@ -106,6 +141,8 @@ public class Digraph<V> {
     
     /**
      * Report (as a Map) the out-degree of each vertex.
+     * @param	None
+     * @return	A map of V and Int
      */
     public Map<V,Integer> outDegree () {
         Map<V,Integer> result = new HashMap<V,Integer>();
@@ -115,6 +152,8 @@ public class Digraph<V> {
     
     /**
      * Report (as a Map) the in-degree of each vertex.
+     * @param	None
+     * @return	A map of V and Int
      */
     public Map<V,Integer> inDegree () {
         Map<V,Integer> result = new HashMap<V,Integer>();
@@ -129,6 +168,8 @@ public class Digraph<V> {
     
     /**
      * Report (as a List) the topological sort of the vertices; null for no such sort.
+     * @param	None
+     * @return	A list of V
      */
     public List<V> topSort () {
         Map<V, Integer> degree = inDegree();
@@ -156,6 +197,8 @@ public class Digraph<V> {
     
     /**
      * True if graph is a dag (directed acyclic graph).
+     * @param	None
+     * @return	boolean describe the graph is a DAG or not
      */
     public boolean isDag () {
         return topSort() != null;

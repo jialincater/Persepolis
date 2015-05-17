@@ -5,8 +5,23 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * class can do structure learning of a BN
+ * @author Cater
+ * @see Learn
+ */
 public class SLearn extends Learn{
+	
+	/**
+	 * Generate a random DAG
+	 * with random number of edges and random edges
+	 * designed for BN
+	 * No vertex have more than 3 parents
+	 * @param ini		is the Initial Network of BN, which contains N vertex and without any edge
+	 * @param Vl		variable list that contains that name of the vertex
+	 * @return	a random DAG
+	 * @author Cater
+	 */
 	public Digraph<String> dagGen(Digraph<String> ini,List<String> Vl){
 		Digraph<String> Res = ini;
 		int N = ini.neighbors.size();
@@ -43,8 +58,14 @@ public class SLearn extends Learn{
 		return Res;
 	}
 	
-	/*
-	To Learn a Baysian Network, not Dynamic
+	/**
+	* To Learn a Baysian Network
+	* @param Nini	 	is the Initial Network of DBN, which contains 2N vertex and without any edge
+	* @param da 		is object of the data class that contains the data and parameters of train file
+	* @param restime	is the time of random restart will run
+	* @param SM			is a flag describe whether we should use MDL or LL
+	* @return	A Digraph of String that contains the graph that fits our train data
+	* @author Cater
 	*/
 	public Digraph<String> learnStructures(Digraph<String> Nini, data da, int restime,boolean SM){
 //		Nini is a Digraph that without any edge

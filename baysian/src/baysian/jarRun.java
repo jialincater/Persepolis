@@ -22,7 +22,7 @@ public class jarRun {
 		}else if(args[2].equals("MDL")){
 			SM = true;
 		}else{
-			System.out.println("Please choice 【LL】 or 【MDL】 as 3rd parameter.");
+			System.out.println("Please choice LL or MDL as 3rd parameter.");
 			System.exit(0);
 		}
 		
@@ -49,16 +49,6 @@ public class jarRun {
     	Learn Xuexi = new DLearn();
     	Digraph<String> Dres = Xuexi.learnStructures(Dini, train, randrest,SM);
     	double TDBN = sw.elapsedTime();
-
-//    	Parameter Learning
-    	dyllscore dyll = new dyllscore(train,Dres);
-    	parameterLearning Pl = new parameterLearning(dyll,train);
-    	
-//    	inference
-    	inference inf = new inference(testDataPath);
-    	List<Integer> inferenceResult = inf.predict(var, dyll, train, Pl, Dres);
-
-//    	
     	
 //    	First OUTPUT
     	System.out.println("Building DBN:           "+TDBN);
@@ -66,8 +56,17 @@ public class jarRun {
     	System.out.println("Initial network:        "+Sres);
 //    	Third OUTPUT
     	System.out.println("Transition network:     "+Dres);
-//    	4th OUTPUT
     	System.out.println("Performing inference:   ");
+    	
+//    	Parameter Learning
+    	dyllscore dyll = new dyllscore(train,Dres);
+    	parameterLearning Pl = new parameterLearning(dyll,train);
+    	
+//    	inference
+    	inference inf = new inference(testDataPath);
+    	List<Integer> inferenceResult = inf.predict(var, dyll, train, Pl, Dres);	
+
+//    	4th OUTPUT
     	for(int i=0;i!=inferenceResult.size();++i){
     		System.out.println("-> instance "+i+":      "+inferenceResult.get(i));
     	}

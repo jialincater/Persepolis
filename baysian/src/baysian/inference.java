@@ -13,6 +13,12 @@ import java.util.List;
 public class inference {
 	private List< List<String> > core;
 	private List<List<Integer>> Dcore;
+	/**
+	 * contructor that read the data from the test file
+	 * @param path	the path where your file locate
+	 * @throws IOException
+	 * @author Cater
+	 */
 	public inference(String path) throws IOException{
 //		Read file & ini core
 		core = new ArrayList< List<String> >();
@@ -42,12 +48,28 @@ public class inference {
    	 	
 //   	 	System.out.println(Dcore);
 	}
-	
+	/**
+	 * private get file function that used by constructor
+	 * @param file	the path where your file locate
+	 * @return	A list of String contains every line of file
+	 * @throws IOException
+	 * @author Cater
+	 */
 	private static List<String> getFile( Path file) throws IOException{
 		List<String> hi  = Files.readAllLines(file, StandardCharsets.US_ASCII);
         return hi;
     }
 	
+	/**
+	 * predict method that can predict the data with existing learned network
+	 * @param var		the number of data you want to predict
+	 * @param dyll		the object of LL score in DBN 
+	 * @param train		the data stores the train file
+	 * @param pL		the object of parameter learning class
+	 * @param digraph1	the digraph learned in the previous steps
+	 * @return	a list of integer contains the result
+	 * @author Cater
+	 */
 	public List<Integer> predict(Integer var,dyllscore dyll,data train,parameterLearning pL,Digraph<String> digraph1){
 		List<String> DVl = train.getDVl();
 //		System.out.println(DVl);
