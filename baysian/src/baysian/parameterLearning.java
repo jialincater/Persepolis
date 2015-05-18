@@ -20,11 +20,17 @@ public class parameterLearning {
 		
 		p_rll = data1.getR();
 		p_numberOfNode = data1.getN();
+		int max = 0;
+		for(int i = 1 ; i< p_numberOfNode ; i++){
+			if (p_rll[max]<p_rll[i]){
+				max=i;
+			}
+		}
 		p_dyrll = new int[2*p_numberOfNode];
 		for(int i = 0 ; i<2*p_numberOfNode ; i++){
 			p_dyrll[i]=p_rll[i%3];
 		}
-		theta = new double[2*p_numberOfNode][10000][10];
+		theta = new double[2*p_numberOfNode][p_rll[max]*p_rll[max]*p_rll[max]][p_rll[max]];
 		this.p_dyqll=d1.getDyqll();
 		//iterate all the count and counts, compute the theta[i][j][k] given count and counts
 		for(int i=0;i<2*p_numberOfNode;i++){

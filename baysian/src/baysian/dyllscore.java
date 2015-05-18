@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * ll algorithm using in the dynamic Bayesian network
+ * LL algorithm using in the dynamic Bayesian network
  */
 public class dyllscore extends scoringfunction{
 	private int parent=0;

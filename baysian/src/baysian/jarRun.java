@@ -67,11 +67,12 @@ public class jarRun {
 //    	Third OUTPUT
     	System.out.println("Transition network:     "+Dres);
     	System.out.println("Performing inference:   ");
-    	
+
+//    	Stopwatch sw1 = new Stopwatch();
 //    	Parameter Learning
     	dyllscore dyll = new dyllscore(train,Dres);
     	parameterLearning Pl = new parameterLearning(dyll,train);
-    	
+//    	System.out.println(sw1.elapsedTime());
 //    	inference
     	inference inf = new inference(testDataPath);
     	List<Integer> inferenceResult = inf.predict(var, dyll, train, Pl, Dres);	

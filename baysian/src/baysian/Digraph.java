@@ -204,7 +204,7 @@ public class Digraph<V> {
      * (implying that the corresponding node cannot be reached).
      * @param start	just the starting Vertex
      */
-    public Map bfsDistance (V start) {
+    public Map<V, Integer> bfsDistance (V start) {
         Map<V,Integer> distance = new HashMap<V,Integer>();
         // Initially, all distance are infinity, except start node
         for (V v: neighbors.keySet()) distance.put(v, null);
